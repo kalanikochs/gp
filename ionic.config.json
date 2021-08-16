@@ -1,0 +1,7 @@
+{
+  "name": "gastropack",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

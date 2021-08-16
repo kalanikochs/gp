@@ -1,0 +1,16 @@
+img{
+    width: 100px;
+    height: 100px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.contenedorImagenes{
+    img:first-child{
+        margin-left: 0px;
+    }
+    
+    img:last-child{
+        margin-right: 0px;
+    }
+}

@@ -1,0 +1,21 @@
+$profs-theme-primary: mat-palette($mat-orange);
+$profs-theme-accent: mat-palette($gastropack-blue);
+$profs-theme-warn: mat-palette($mat-red);
+
+$profs-material-theme: mat-light-theme(
+  $profs-theme-primary,
+  $profs-theme-accent,
+  $profs-theme-warn
+);
+
+@mixin profs-material-mixin($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);  
+}
+
+#profs-material-container,
+.profs-material-container {
+  @include angular-material-theme($profs-material-theme);
+  @include default-material-mixin($profs-material-theme);
+}

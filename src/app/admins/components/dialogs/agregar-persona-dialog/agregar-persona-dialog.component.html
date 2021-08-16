@@ -1,0 +1,84 @@
+<h1 mat-dialog-title>Agregar un {{ data.persona_tipo }}</h1>
+<mat-dialog-content *ngIf="tipoPersona.length > 0">
+  <form [formGroup]="addPersonaForm">
+    <div class="row">
+      <div class="col-xs-12 col-md-6">
+        <mat-form-field class="w-100">
+          <mat-label>Nombres</mat-label>
+          <input matInput formControlName="nombres" type="text" />
+        </mat-form-field>
+      </div>
+
+      <div class="col-xs-12 col-md-6">
+        <mat-form-field class="w-100">
+          <mat-label>Apellidos</mat-label>
+          <input matInput formControlName="apellidos" type="text" />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 col-md-6">
+        <mat-form-field class="w-100">
+          <mat-label>Dirección</mat-label>
+          <input matInput formControlName="direccion" type="text" />
+        </mat-form-field>
+      </div>
+
+      <div class="col-xs-12 col-md-6">
+        <mat-form-field class="w-100">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="telefono" type="number" />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 col-md-6">
+        <mat-form-field class="w-100">
+          <mat-label>Documento</mat-label>
+          <input matInput formControlName="documento" type="number" />
+        </mat-form-field>
+      </div>
+
+      <div class="col-xs-12 col-md-6">
+        <mat-form-field class="w-100">
+          <mat-label>Tipo</mat-label>
+          <mat-select formControlName="tipo">
+            <mat-option
+              *ngFor="let tp of tipoPersona"
+              value="{{ tp.tipo_persona_id }}"
+              >{{ tp.tipo_persona_nombre }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 col-md-6">
+        <mat-form-field class="w-100">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" type="text" />
+        </mat-form-field>
+      </div>
+
+      <div class="col-xs-12 col-md-6">
+        <mat-form-field class="w-100">
+          <mat-label>Contraseña</mat-label>
+          <input matInput formControlName="contrasena" type="text" />
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions class="flex center-xs">
+  <button
+    mat-raised-button
+    color="primary"
+    cdkFocusInitial
+    (click)="agregarPersona()"
+  >
+    Crear {{ data.persona_tipo }}
+  </button>
+</mat-dialog-actions>

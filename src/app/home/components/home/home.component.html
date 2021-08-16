@@ -1,0 +1,28 @@
+<div id="default-material-container">
+  <div id="homeContainer" class="landscape allCenter">
+    
+    <img id="homeLogo" src="/assets/img/homeLogo.jpg" alt="homeLogo" (click)="easterEgg()" />
+    <div class="w-100 mw-100 flex justify-content-center mt-20">
+      <form [formGroup]="homeForm">
+        <mat-form-field class="w-100">
+          <mat-label>Correo de Usuario</mat-label>
+          <input
+            matInput
+            formControlName="email"
+            placeholder="Ej: ejemplo@ejemplo.com"
+            type="text"
+          />
+        </mat-form-field>
+        <mat-form-field class="w-100">
+          <mat-label>Contraseña</mat-label>
+          <input formControlName="password" matInput type="password" />
+        </mat-form-field>
+        <div class="w-100 flex justify-content-center">
+          <button mat-raised-button class="w-60 mt-20" (click)="sendForm()">
+            Ingresar
+          </button>
+        </div>        
+      </form>
+    </div>
+  </div>
+</div>

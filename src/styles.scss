@@ -1,0 +1,22 @@
+@import '~@angular/material/theming';
+@import 'app/colors_material';
+@import 'assets/styles/flexboxgrid.min';
+@import 'app/default-conf';
+
+@import 'app/default-material-theming';
+@import 'app/users/users_material_theming';
+@import 'app/profs/profs_material_theming';
+@import 'app/admins/admins_material_theming';
+@import 'app/sadmins/sadmins_material_theme';
+
+@include mat-core();
+
+/* ========================================= */
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}

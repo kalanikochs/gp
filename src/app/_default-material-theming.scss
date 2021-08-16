@@ -1,0 +1,36 @@
+$default-theme-primary: mat-palette($gastropack-green);
+$default-theme-accent: mat-palette($gastropack-blue);
+$default-theme-warn: mat-palette($mat-red);
+
+$default-material-theme: mat-light-theme(
+  $default-theme-primary,
+  $default-theme-accent,
+  $default-theme-warn
+);
+
+@mixin default-material-mixin($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+  
+  mat-success{
+    color: mat-color($primary);
+  }
+  
+  .color{
+    &-primary{
+        color: mat-color($primary);
+    }
+    &-accent{
+      color: mat-color($accent);
+    }
+    &-warn{
+      color: mat-color($warn);
+    }
+  }
+}
+
+#default-material-container, .default-material-container {
+  @include angular-material-theme($default-material-theme);
+  @include default-material-mixin($default-material-theme);  
+}

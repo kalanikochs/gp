@@ -1,0 +1,39 @@
+<div class="landscape layout">
+  <nav mat-tab-nav-bar>
+    <a
+      mat-tab-link
+      [active]="activeLink == 'home'"
+      routerLink="./home"
+      (click)="changeWindow()"
+    >
+      <span class="flex middle-xs iconsMenu">
+        <mat-icon>home</mat-icon>
+        <span class="iconText">Inicio</span>
+      </span>
+    </a>
+    <a
+      mat-tab-link
+      [active]="activeLink == 'citas'"
+      routerLink="./citas"
+      (click)="changeWindow()"
+    >
+      <span class="flex middle-xs iconsMenu">
+        <mat-icon>assignment</mat-icon>
+        <span class="iconText">Citas de seguimiento</span>
+      </span>
+    </a>
+    <a
+      mat-tab-link
+      [active]="activeLink == 'planes'"
+      routerLink="./planes"
+      (click)="changeWindow()"
+    >
+      <span class="flex middle-xs iconsMenu">
+        <mat-icon>event</mat-icon>
+        <span class="iconText">Planes de nutricion</span>
+      </span>
+    </a>
+  </nav>
+
+  <router-outlet></router-outlet>
+</div>

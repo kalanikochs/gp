@@ -1,0 +1,91 @@
+<h1 mat-dialog-title>{{ data.plan.plan_nombre }}</h1>
+<mat-dialog-content>
+  <h3>Descripción del plan</h3>
+  <p>{{ data.plan.plan_descripcion }}</p>
+
+  <h3>Meta del plan</h3>
+  <p>{{ data.plan.plan_meta }}</p>
+
+  <h3>Profesional encargado</h3>
+  <p>{{ data.plan.plan_profesional_nombre }}</p>
+
+  <div *ngIf="data.plan.plan_anexos.length > 0">
+    <h3>Imágenes y anexos del plan</h3>
+    <div class="{{data.plan.plan_anexos.length === 1 ? 'row center-xs':'row evenly-xs'}}">
+      <div
+        class="col-xs-12 flex justify-content-center mt-10 mb-10"
+        *ngFor="let anexo of data.plan.plan_anexos; let ind = index"
+      >
+        
+        <div *ngIf="imgExtensions.includes(anexo.split('.')[anexo.split('.').length-1])">
+          <a href="{{ anexo }}" download target="_blank">
+            <img src="{{ anexo }}" alt="imagen{{ ind }}" class="imgDialog" />
+          </a>
+        </div>
+
+        <div *ngIf="!imgExtensions.includes(anexo.split('.')[anexo.split('.').length-1])" class="flex flex-direction-column align-items-center">
+          <a href="{{ anexo }}" download target="_blank">
+            <mat-icon color="primary" class="anexoDialog">attach_file</mat-icon>
+            <h3 style="text-align: center;">
+              {{ anexo.split('/')[anexo.split('/').length - 1] }}
+            </h3>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-container *ngIf="data.plan.plan_links !== ''" >
+
+    <ng-container *ngIf="data.plan.plan_links | jsonParse | thereAreVideos">
+
+      <h3>Videos del plan</h3>
+      <ng-container *ngFor="let link of data.plan.plan_links | jsonParse">
+        <div class="row">
+          <div class="col-xs-12">
+            <h4>{{ link.nombre }}</h4>
+            <iframe
+              width="100%"
+              height="315"
+              [src]="getVideoIframe(link.link)"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      </ng-container>
+
+    </ng-container>
+
+ 
+  </ng-container>
+
+<ng-container *ngIf="data.plan.plan_links !== ''">
+
+    <ng-container *ngIf="data.plan.plan_links
+    | jsonParse
+    | thereAreLinks">
+      <h3>Links del plan</h3>
+      <mat-list role="list">
+        <ng-container *ngFor="let link of data.plan.plan_links | jsonParse">
+          <a
+            *ngIf="link | isLink"
+            mat-list-item
+            role="listitem"
+            href="{{ link.link }}"
+            target="_blank"
+            >{{ link.nombre }}</a
+          >
+        </ng-container>
+      </mat-list>
+    </ng-container>
+  
+</ng-container>
+
+</mat-dialog-content>
+<mat-dialog-actions class="flex center-xs end-md">
+  <button mat-raised-button color="accent" cdkFocusInitial mat-dialog-close>
+    Cerrar ventana
+  </button>
+</mat-dialog-actions>

@@ -1,0 +1,75 @@
+
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    class="mat-elevation-z8 w-100"
+    *ngIf="alimentosArray.length > 0"
+  >
+    <!-- Name Column -->
+    <ng-container matColumnDef="alimento">
+      <th mat-header-cell *matHeaderCellDef>Lista de alimentos</th>
+      <td mat-cell *matCellDef="let element">
+        {{ nombreAlimento(element) }}
+        <mat-icon
+          style="float: right;"
+          class="cursor-context-menu"
+          (click)="borrarAlimento(element)"
+          >close</mat-icon
+        >
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <div class="mt-30 w-100">
+    <ng-container [formGroup]="formAlimentos" class="w-80">
+      <div class="row">
+        <div class="col-xs-12">
+          <mat-form-field class="w-100">
+            <mat-label>Grupo alimenticio</mat-label>
+            <mat-select
+              formControlName="grupoalimenticio"
+              (selectionChange)="selecionarAlimentosGrupos($event.value)"
+            >
+              <mat-option
+                *ngFor="let grupo of grupoalimenticio"
+                [value]="grupo.grupoalimenticio_id"
+              >
+                {{ grupo.grupoalimenticio_nombre }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <mat-form-field class="w-100">
+            <mat-label>Alimento</mat-label>
+            <mat-select formControlName="alimento">
+              <mat-option
+                *ngFor="let alimento of alimentosToShow"
+                [value]="alimento.alimento_id"
+              >
+                {{ alimento.alimento_nombre }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="w-100 flex justify-content-center">
+        <button
+          mat-raised-button
+          color="accent"
+          (click)="agregarAlimento()"
+          class="mt-20"
+        >
+          Agregar Alimento a la Dieta
+        </button>
+      </div>
+    </ng-container>
+  </div>
+

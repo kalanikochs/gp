@@ -1,0 +1,126 @@
+
+  <table class="mat-table mat-elevation-z8 w-100" *ngIf="dieta.length > 0">
+    <!-- dias de la semana -->
+    <ng-container *ngFor="let dia of dieta; index as diaIndex">
+      <!-- nombre del dia -->
+      <tr>
+        <td
+          [attr.rowspan]="
+            2 * cantidadDeJornadasDia(dia) + cantidadDeAlimentosDia(dia)
+          "
+        >
+          {{ findDia(dia) }}
+        </td>
+      </tr>
+
+      <ng-container
+        *ngFor="let jornada of dia.jornadasalimenticias; index as jornadaIndex"
+      >
+        <!-- nombre de la jornada -->
+
+        <tr>
+          <td [attr.rowspan]="jornada.alimentos.length + 2">
+            {{ findJornada(jornada) }}
+          </td>
+        </tr>
+
+        <ng-container
+          *ngFor="let alimento of jornada.alimentos; index as alimentoIndex"
+        >
+          <tr>
+            <td>
+              {{ findAlimento(alimento) }}
+              <mat-icon
+                style="float: right;"
+                class="cursor-context-menu"
+                (click)="borrarAlimento(diaIndex, jornadaIndex, alimentoIndex)"
+                >close</mat-icon
+              >
+            </td>
+          </tr>
+        </ng-container>
+
+        <mat-divider></mat-divider>
+      </ng-container>
+    </ng-container>
+  </table>
+
+
+<div class="mt-30 w-100">
+  <ng-container [formGroup]="formDieta" class="w-80">
+    <div class="row">
+      <div class="col-xs-12">
+        <mat-form-field class="w-100">
+          <mat-label>Dia de la semana</mat-label>
+          <mat-select formControlName="dia">
+            <mat-option *ngFor="let dia of dias" [value]="dia.dia_id">{{
+              dia.dia_nombre
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <mat-form-field class="w-100">
+          <mat-label>Jornada del día</mat-label>
+          <mat-select formControlName="jornadaalimenticia">
+            <mat-option
+              *ngFor="let jornada of jornadaalimenticia"
+              [value]="jornada.jornadaalimenticia_id"
+            >
+              {{ jornada.jornadaalimenticia_nombre }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <mat-form-field class="w-100">
+          <mat-label>Grupo alimenticio</mat-label>
+          <mat-select
+            formControlName="grupoalimenticio"
+            (selectionChange)="selecionarAlimentosGrupos($event.value)"
+          >
+            <mat-option
+              *ngFor="let grupo of grupoalimenticio"
+              [value]="grupo.grupoalimenticio_id"
+            >
+              {{ grupo.grupoalimenticio_nombre }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <mat-form-field class="w-100">
+          <mat-label>Alimento</mat-label>
+          <mat-select formControlName="alimento">
+            <mat-option
+              *ngFor="let alimento of alimentosToShow"
+              [value]="alimento.alimento_id"
+            >
+              {{ alimento.alimento_nombre }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="w-100 flex justify-content-center">
+      <button
+        mat-raised-button
+        color="accent"
+        (click)="agregarAlimentoDieta()"
+        class="mt-20"
+      >
+        Agregar Alimento a la Dieta
+      </button>
+    </div>
+  </ng-container>
+</div>

@@ -1,0 +1,14 @@
+<div id="default-material-container" class="landscape flex center-xs middle-xs">
+  <button mat-raised-button color="primary" (click)="openDialog1()">
+    Diaolg 1
+  </button>
+
+  <button mat-raised-button (click)="openDialog2()">
+    Dialog 2
+  </button>
+
+  <button mat-raised-button (click)="openDialog3()">Dialog 3</button>
+  <p *ngIf="nombre">Tu nombre es {{nombre}} {{apellido}}</p>
+
+  <button mat-raised-button (click)="openDialog4()">Dialog 4</button>
+</div>

@@ -1,0 +1,54 @@
+<div id="admins-material-container">
+    <mat-sidenav-container class="sidenav-container" *ngIf="userLogin$">
+      <mat-sidenav #drawer class="sidenav" fixedInViewport
+          [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+          [mode]="(isHandset$ | async) ? 'over' : 'side'"
+          [opened]="(isHandset$ | async) === false">
+        <mat-toolbar routerLink="./" class="cursor-context-menu">Inicio</mat-toolbar>
+        <mat-nav-list>
+          <a mat-list-item routerLink="citas">Listado de citas</a>
+          <a mat-list-item routerLink="planes">Listado de planes</a>
+          <a mat-list-item routerLink="profesionales">Gestión de profesionales</a>
+          <a mat-list-item routerLink="usuarios">Gestión de usuarios</a>        
+          <a *ngIf="(isHandset$ | async)" mat-list-item (click)="openProfile()">Perfil</a>
+          <!-- <a *ngIf="(isHandset$ | async)" mat-list-item (click)="openNotifications()">Notificaciones <span class="ml-20" matBadge="{{notifications$.length}}" matBadgeColor="warn"></span></a> -->
+          <a *ngIf="(isHandset$ | async)" mat-list-item (click)="logout()">Cerrar Sesión</a>
+        </mat-nav-list>
+      </mat-sidenav>
+      <mat-sidenav-content>
+        <mat-toolbar color="primary">
+          <button
+            type="button"
+            aria-label="Toggle sidenav"
+            mat-icon-button
+            (click)="drawer.toggle()"
+            *ngIf="(isHandset$ | async)">
+            <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+          </button>
+          <!-- Aqui se agregan los elemenots de la navbar -->
+          <div class="flex between-xs w-100">
+            <span >Bienvenid@: {{userLogin$.nombres}}</span>
+  
+            <div class="flex around-xs" style="width: 100px;" *ngIf="!(isHandset$ | async)">
+             <!--  <span (click)="openNotifications()" class="cursor-context-menu" matBadge="{{notifications$.length}}" matBadgeColor="warn">
+                <mat-icon>notifications</mat-icon>           
+              </span> -->
+              <span class="cursor-context-menu" (click)="openProfile()">
+                <mat-icon>person</mat-icon>
+              </span>
+              <span class="cursor-context-menu" (click)="logout()">
+                <mat-icon>logout</mat-icon>
+              </span>    
+            </div>
+  
+          </div>
+        </mat-toolbar>
+        <!-- Add Content Here -->
+        <div class="border-box p-10">
+          <router-outlet></router-outlet>
+        </div>
+    
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
+  

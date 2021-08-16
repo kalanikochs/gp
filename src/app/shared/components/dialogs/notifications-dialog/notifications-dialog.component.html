@@ -1,0 +1,31 @@
+<div *ngIf="thisClass !== ''">
+  <div [class]="thisClass">
+    <h2>Listado de Notificaciones No recibidas</h2>
+    <mat-dialog-content>
+      <mat-list role="list">
+        <mat-list-item role="listitem" *ngFor="let notif of notifications">{{
+          notif.notificacion_desc
+        }}</mat-list-item>
+      </mat-list>
+    </mat-dialog-content>
+    <mat-dialog-actions class="flex end-xs default-material-container">
+      <button
+        mat-raised-button
+        color="primary"
+        [mat-dialog-close]="{ update: notifications.length > 0 ? true : false }"
+        cdkFocusInitial
+      >
+        Dar notificaciones como leídas
+      </button>
+      <button
+        mat-raised-button
+        color="accent"
+        [mat-dialog-close]="{ update: false }"
+      >
+        Salir sin actualizar notificaciones
+      </button>
+    </mat-dialog-actions>
+  </div>
+</div>
+
+

@@ -1,0 +1,176 @@
+
+    <h1 mat-dialog-title>Información de la cita</h1>
+    <mat-dialog-content>
+        <form [formGroup]="citasViewForm">
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <mat-form-field class="w-100">
+                        <mat-label>Fecha</mat-label>
+                        <input
+                          matInput
+                          formControlName="fecha"                          
+                          type="text"
+                        />
+                      </mat-form-field>
+                </div>
+
+                <div class="col-xs-12 col-md-6">
+                    <mat-form-field class="w-100">
+                        <mat-label>Hora</mat-label>
+                        <input
+                          matInput
+                          formControlName="hora"                         
+                          type="text"
+                        />
+                      </mat-form-field>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <mat-form-field class="w-100">
+                        <mat-label>Profesional</mat-label>
+                        <input
+                          matInput
+                          formControlName="profesional"                         
+                          type="text"
+                        />
+                      </mat-form-field>
+                </div>
+
+                <div class="col-xs-12 col-md-6">
+                    <mat-form-field class="w-100">
+                        <mat-label>Paciente</mat-label>
+                        <input
+                          matInput
+                          formControlName="usuario"                         
+                          type="text"
+                        />
+                      </mat-form-field>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-xs-12 col-md-6">
+                  <mat-form-field class="w-100">
+                      <mat-label>Tipo</mat-label>
+                      <input
+                        matInput
+                        formControlName="tipo"                         
+                        type="text"
+                      />
+                    </mat-form-field>
+                </div>
+
+                <div class="col-xs-12 col-md-6">
+                    <mat-form-field class="w-100">
+                        <mat-label>Estado</mat-label>
+                        <input
+                          matInput
+                          formControlName="estado"                         
+                          type="text"
+                        />
+                      </mat-form-field>
+                </div>              
+            </div>
+
+            <div class="row" *ngIf="cita.cita_resultado">
+                <div class="col-xs-12">
+                    <mat-form-field class="w-100">
+                        <mat-label>Resultado</mat-label>
+                        <textarea
+                          matInput
+                          formControlName="resultado"                         
+                          type="text"
+                          cdkTextareaAutosize
+                        ></textarea>
+                      </mat-form-field>
+                </div>              
+            </div>
+        </form>
+
+        <!-- Espacio para pruebas -->
+
+        <ng-container *ngIf="pruebas">
+          <div class="row mr-10 ml-10 mb-10">
+
+            <div class="col-xs-12">
+              <mat-accordion>
+                <mat-expansion-panel hideToggle>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Resultados de pruebas médicas
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+    
+                  <ng-container [formGroup]="pruebasForm">
+    
+                          <div class="row">
+                            <div class="col-xs-12 col-sm-6">
+                              <h3>Prueba Meld Na:</h3>
+                            </div>
+              
+                            <div class="col-xs-12 col-sm-6">
+                              <mat-form-field class="w-100">
+                                <textarea
+                                  matInput
+                                  formControlName="meldna"
+                                  placeholder="Resultados de la prueba"
+                                  cdkTextareaAutosize
+                                ></textarea>
+                              </mat-form-field>
+                            </div>
+                          </div>
+              
+                          <div class="row">
+                            <div class="col-xs-12 col-sm-6">
+                              <h3>Prueba Child-Pugh:</h3>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6">
+                              <mat-form-field class="w-100">
+                                <textarea
+                                  matInput
+                                  formControlName="childpugh"
+                                  placeholder="Resultados de la prueba"
+                                  cdkTextareaAutosize
+                                ></textarea>
+                              </mat-form-field>
+                            </div>
+                          </div>
+              
+                          <div class="row">
+                            <div class="col-xs-12 col-sm-6">
+                              <h3>Prueba Nafld Score:</h3>
+                            </div>
+              
+                            <div class="col-xs-12 col-sm-6">
+                              <mat-form-field class="w-100">
+                                <textarea
+                                  matInput
+                                  formControlName="nafldscore"
+                                  placeholder="Resultados de la prueba"
+                                  cdkTextareaAutosize
+                                ></textarea>
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        
+    
+                  </ng-container>  
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+    
+         </div>
+        </ng-container>
+
+    </mat-dialog-content>
+    <mat-dialog-actions class="flex justify-content-end">
+      <button mat-raised-button color="accent" [mat-dialog-close]="true"> Cerrar</button>
+    </mat-dialog-actions>
+
+

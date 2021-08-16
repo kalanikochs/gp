@@ -1,0 +1,12 @@
+<div class="allCenter" style="flex-direction: column;">
+    <h1 mat-dialog-title class="mb-10">Subir una evidencia</h1>
+    <span class="mb-10">Podrás subir las evidencias de tus ritunas desde tu computados o desde tu celular</span>
+    <form [formGroup] ="testFileForm" enctype="multipart/form-data">
+    <mat-form-field>
+        <ngx-mat-file-input formControlName="basicFile" placeholder="Basic Input" multiple capture="camera"></ngx-mat-file-input>
+        <mat-icon matSuffix>folder</mat-icon>
+    </mat-form-field>
+    <button mat-button color="primary" (click)="sendData()" style="display: block;">Enviar</button>
+</form>        
+</div>
+

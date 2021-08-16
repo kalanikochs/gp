@@ -1,0 +1,54 @@
+<h1 mat-dialog-title>Solicitar una cita</h1>
+<mat-dialog-content>
+  <form [formGroup]="citasApplyForm" *ngIf="showForm">
+    <div class="row">
+      <div class="col-xs-12 col-md-6">
+        <mat-form-field class="w-100">
+          <mat-label>Fecha</mat-label>
+          <input matInput formControlName="fecha" type="date" />
+        </mat-form-field>
+      </div>
+
+      <div class="col-xs-12 col-md-6">
+        <mat-form-field class="w-100">
+          <mat-label>Hora</mat-label>
+          <input matInput formControlName="hora" type="time" />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 col-md-6">
+        <mat-form-field class="w-100">
+          <mat-label>Usuarios</mat-label>
+          <mat-select formControlName="usuario">            
+            <mat-option
+              *ngFor="let usuario of listadoUsuarios"
+              value="{{usuario.persona_id}}"
+              >{{ usuario.persona_nombres }}
+              {{ usuario.persona_apellidos }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-xs-12 col-md-6">
+        <mat-form-field class="w-100">
+          <mat-label>Tipo de Cita</mat-label>
+          <mat-select formControlName="tipo">            
+            <mat-option
+              *ngFor="let tc of tiposCitas"
+              value="{{tc.cita_tipo_id}}"
+              >{{ tc.cita_tipo_nombre }}
+              </mat-option>
+
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions class="flex center-xs">
+  <button mat-raised-button color="primary" cdkFocusInitial (click)="submitForm()">
+    Agendar Cita
+  </button>
+</mat-dialog-actions>

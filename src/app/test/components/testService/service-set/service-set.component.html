@@ -1,0 +1,15 @@
+
+<div id="default-material-container" class="landscape flex flex-column center-xs middle-xs">
+    <form class="example-form" [formGroup]="testForm">
+        <mat-form-field class="example-full-width">
+          <mat-label>Asignar variable de test</mat-label>
+          <input
+            matInput
+            formControlName="testVar"            
+            type="text"
+          />
+        </mat-form-field>        
+        <button mat-raised-button class="w-60 mt-20" (click)="sendForm()">Ingresar</button>
+        <button mat-raised-button class="w-60 mt-20" (click)="deleteSession()">Eliminar Session</button>
+      </form>
+</div>

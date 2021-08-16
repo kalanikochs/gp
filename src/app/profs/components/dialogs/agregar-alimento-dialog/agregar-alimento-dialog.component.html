@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Agregar un alimento</h1>
+<mat-dialog-content>
+  <form [formGroup]="agregarAlimentoForm">
+    <mat-form-field class="w-100">
+      <mat-label>Grupo alimenticio</mat-label>
+      <input matInput formControlName="grupoalimenticio" type="text" />
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Alimento</mat-label>
+      <input matInput formControlName="alimento" type="text" />
+    </mat-form-field>
+     
+  </form>
+  
+</mat-dialog-content>
+<mat-dialog-actions class="flex justify-content-end">
+<button mat-raised-button color="primary" (click)="agregarAlimento()"> Registrar Alimento</button>
+<button mat-raised-button color="accent" [mat-dialog-close]="{ reload: false }"> Cerrar</button>
+</mat-dialog-actions>

@@ -1,0 +1,66 @@
+<div class="this-layout">
+  <button
+    mat-stroked-button
+    *ngIf="rutinaInfo"
+    color="primary"
+    class="mt-10 mb-10"
+    [routerLink]="['../../', rutinaInfo.rutina_plan_id]"
+  >
+    <mat-icon class="inverted">trending_flat</mat-icon> Volver al listado de
+    rutinas
+  </button>
+
+  <h3 cdkFocusInitial *ngIf="rutinaInfo">
+    Rutina actual: {{ rutinaInfo.rutina_nombre }}
+  </h3>
+  <h4>Listado de Evidencias</h4>
+
+  <div class="w-100 mt-10 mb-20 flex center-xs start-md">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="agregarEvidencia()"
+      *ngIf="
+        userLogged$.type === '1' &&
+        this.planActual &&        
+        this.planActual.plan_estado_id !== '3'
+      "
+    >
+      Agregar una Evidencia
+    </button>
+  </div>
+
+  <div class="w-100 flex justify-content-center">
+    <div class="table-container">
+      <table mat-table [dataSource]="dataSource" class="w-100">
+        <ng-container matColumnDef="fecha">
+          <th mat-header-cell *matHeaderCellDef class="uno-td">Fecha</th>
+          <td mat-cell *matCellDef="let element" class="uno-td">
+            {{ element.evidencia_fecha | fechaPretty }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="opciones">
+          <th mat-header-cell *matHeaderCellDef>Opciones</th>
+          <td mat-cell *matCellDef="let element">
+            <div
+              style="display: flex; justify-content: space-evenly; width: 100%;"
+            >
+              <mat-icon
+                class="cursor-context-menu"
+                (click)="verEvidencia(element.evidencia_id)"
+                >remove_red_eye</mat-icon
+              >
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- esto es como tal lo que arma la tabla -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </div>
+  </div>
+</div>

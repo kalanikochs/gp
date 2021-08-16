@@ -1,0 +1,45 @@
+<mat-dialog-content>
+    <div class="allCenter">
+      <h4 *ngIf="avilableOption.length === 0">
+        Actualmente no tienes opciones para esta Persona
+      </h4>   
+      <button
+        *ngIf="avilableOption.includes('anular')"
+        class="mt-10 mb-10"
+        mat-stroked-button
+        color="warn"
+        (click)="closeOptions('anular')"
+      >
+        Suspender {{data.persona_tipo}}
+      </button>
+
+      <button
+        *ngIf="avilableOption.includes('activar')"
+        class="mt-10 mb-10"
+        mat-raised-button
+        color="accent"
+        (click)="closeOptions('activar')"
+      >
+        Activar {{data.persona_tipo}}
+      </button>
+
+      <button
+        *ngIf="permitirEliminar"
+        class="mt-10 mb-10"
+        mat-stroked-button
+        color="warn"
+        (click)="closeOptions('eliminar')"
+      >
+        Eliminar {{data.persona_tipo}}
+      </button>
+
+      <button
+        class="mt-10 mb-10"
+        mat-stroked-button
+        color="primary"
+        (click)="closeOptions('modificar')"
+      >
+        Modificar {{data.persona_tipo}}
+      </button>
+    </div>
+  </mat-dialog-content>

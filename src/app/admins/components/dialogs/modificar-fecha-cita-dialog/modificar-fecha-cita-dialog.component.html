@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>Modificar Fecha de una Cita</h1>
+<mat-dialog-content>
+  <form [formGroup]="modificarFechaCitaForm">
+    <div class="row">
+      <div class="col-xs-12 col-md-6">
+        <mat-form-field class="w-100">
+          <mat-label>Fecha</mat-label>
+          <input matInput formControlName="fecha" type="date" />
+        </mat-form-field>
+      </div>
+
+      <div class="col-xs-12 col-md-6">
+        <mat-form-field class="w-100">
+          <mat-label>Hora</mat-label>
+          <input matInput formControlName="hora" type="time" />
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions class="flex center-xs">
+  <button mat-raised-button color="primary" cdkFocusInitial (click)="submitForm()">
+    Modificar Fecha
+  </button>
+  <button mat-raised-button color="warn" [mat-dialog-close]="false">
+    Cancelar
+  </button>
+</mat-dialog-actions>

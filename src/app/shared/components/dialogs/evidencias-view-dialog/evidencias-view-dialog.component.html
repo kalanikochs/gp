@@ -1,0 +1,52 @@
+<h1 mat-dialog-title>
+  Fecha de la evidencia: {{ data.evidencia.evidencia_fecha }}
+</h1>
+<mat-dialog-content>
+  <div *ngIf="data.evidencia.evidencia_anexos.length > 0; else noAnexos">
+    <h3>Imágenes de la evidencia</h3>
+    <div
+      class="row"
+      *ngFor="let anexo of data.evidencia.evidencia_anexos; let ind = index"
+    >
+      <div class="col-xs-12 flex justify-content-center mt-10 mb-10">
+        <img src="{{ anexo }}" alt="imagen{{ ind }}" class="imgDialog" />
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noAnexos>
+    <h3>No hay imágenes anexas para esta evidencia</h3>
+  </ng-template>
+
+  <!-- ========================= -->
+
+  <div *ngIf="informacion" [formGroup]="evidenciaForm">
+    <h3>Observación de la evidencia</h3>
+    <mat-form-field class="w-100">
+      <mat-label>Observación</mat-label>
+      <textarea
+        matInput
+        formControlName="observacion"
+        cdkTextareaAutosize
+        type="text"
+      ></textarea>
+    </mat-form-field>
+  </div>
+
+  <div *ngIf="data.planActual.plan_tipo === '3'">
+    <h3>Alimentos de la evidencia</h3>
+    <h5 class="color-accent">
+      **Aplica sólo para evidencias planes nutricionales
+    </h5>
+    <ng-container *ngIf="informacion.alimentos">     
+      <app-alimentos-view
+        [alimentosInput]="informacion.alimentos"
+      ></app-alimentos-view>
+    </ng-container>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions class="flex center-xs end-md">
+  <button mat-raised-button color="accent" cdkFocusInitial mat-dialog-close>
+    Cerrar ventana
+  </button>
+</mat-dialog-actions>

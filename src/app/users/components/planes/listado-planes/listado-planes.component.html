@@ -1,0 +1,87 @@
+<div class="this-layout flex justify-content-center">
+  <div class="table-container">
+    <button
+      mat-stroked-button
+      color="primary"
+      *ngIf="
+        userLogged$.type == 2 || userLogged$.type == 3 || userLogged$.type == 4
+      "
+      style="display: block;"
+      class="mt-10 mb-10"
+      (click)="asignarPlan()"
+    >
+      Asignar un plan
+    </button>
+
+    <mat-form-field>
+      <mat-label>Filtrar plan</mat-label>
+      <input
+        matInput
+        (keyup)="applyFilter($event)"
+        [placeholder]="tableFilterPlaceHolder()"
+        #input
+      />
+    </mat-form-field>
+
+    <div class="table-overflow">
+      <table mat-table [dataSource]="dataSource" class="w-100">
+        <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="fecha" *ngIf="!small">
+          <th mat-header-cell *matHeaderCellDef class="fecha-td">Fecha</th>
+          <td mat-cell *matCellDef="let element" class="fecha-td">
+            {{ element.plan_fecha | fechaPretty }}
+          </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef class="nombre-td">Nombre</th>
+          <td mat-cell *matCellDef="let element" class="nombre-td">
+            {{ element.plan_nombre }}
+          </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="estado">
+          <th mat-header-cell *matHeaderCellDef>Estado</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.plan_estado_nombre }}
+          </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="opciones">
+          <th mat-header-cell *matHeaderCellDef>Opciones</th>
+          <td mat-cell *matCellDef="let element">
+            <div
+              style="display: flex; justify-content: space-evenly; width: 100%;"
+            >
+              <mat-icon
+                class="cursor-context-menu"
+                (click)="showPlan(element.plan_id)"
+                >remove_red_eye</mat-icon
+              >
+              <mat-icon
+                class="cursor-context-menu"
+                *ngIf="element.plan_estado_id !== '2'; else x"
+                [routerLink]="['./rutinas', element.plan_id]"
+                >last_page</mat-icon
+              >
+              <ng-template #x>
+                <mat-icon class="cursor-context-menu">not_interested</mat-icon>
+              </ng-template>
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- esto es como tal lo que arma la tabla -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+</div>

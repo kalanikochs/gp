@@ -1,0 +1,30 @@
+@import '_users_conf.scss';
+
+$users-theme-primary: mat-palette($mat-light-blue);
+$users-theme-accent: mat-palette($gastropack-blue);
+$users-theme-warn: mat-palette($mat-red);
+
+$users-material-theme: mat-light-theme(
+  $users-theme-primary,
+  $users-theme-accent,
+  $users-theme-warn
+);
+
+@mixin users-material-mixin($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);   
+
+  mat-success{
+    color: mat-color($primary);
+  }  
+}
+
+
+
+#users-material-container, .users-material-container {
+  @include angular-material-theme($users-material-theme);  
+  @include default-material-mixin($users-material-theme);
+  @include users_conf();
+}
+

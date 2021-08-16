@@ -1,0 +1,24 @@
+$sadmins-theme-primary: mat-palette($mat-deep-purple);
+$sadmins-theme-accent: mat-palette($gastropack-blue);
+$sadmins-theme-warn: mat-palette($mat-red);
+
+$sadmins-material-theme: mat-light-theme(
+  $sadmins-theme-primary,
+  $sadmins-theme-accent,
+  $sadmins-theme-warn
+);
+
+@mixin sadmins-material-mixin($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+
+  .ejemplo {
+    background-color: mat-color($primary, lighter);
+  }
+}
+
+#sadmins-material-container, .sadmins-material-container {
+  @include angular-material-theme($sadmins-material-theme);
+  @include default-material-mixin($sadmins-material-theme);
+}

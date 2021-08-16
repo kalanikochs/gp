@@ -1,0 +1,36 @@
+<mat-dialog-content>
+  <div class="allCenter">
+    <h4 *ngIf="avilableOption.length === 0">
+      Actualmente no tienes opciones para este plan
+    </h4>
+    <button
+      *ngIf="avilableOption.includes('anular')"
+      class="mt-10 mb-10"
+      mat-raised-button
+      color="warn"
+      (click)="closeOptions('anular')"
+    >
+      Anular Plan
+    </button>
+
+    <button
+      *ngIf="avilableOption.includes('activar')"
+      class="mt-10 mb-10"
+      mat-raised-button
+      color="primary"
+      (click)="closeOptions('activar')"
+    >
+      Activar Plan
+    </button>
+
+    <button
+      *ngIf="avilableOption.includes('finalizar')"
+      class="mt-10 mb-10"
+      mat-raised-button
+      color="accent"
+      (click)="closeOptions('finalizar')"
+    >
+      Finalizar Plan
+    </button>
+  </div>
+</mat-dialog-content>

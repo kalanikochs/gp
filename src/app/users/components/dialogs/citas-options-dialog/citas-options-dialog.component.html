@@ -1,0 +1,25 @@
+<mat-dialog-content>
+  <div class="allCenter">
+    <h4 *ngIf="avilableOption === 'none'">
+      Actualmente no tienes opciones para esta cita
+    </h4>
+    <button
+      *ngIf="avilableOption === 'confirmar'"
+      class="mt-10 mb-10"
+      mat-raised-button
+      color="primary"
+      (click)="closeOptions('confirmar')"
+    >
+      Confirmar asistencia
+    </button>
+    <button
+      *ngIf="avilableOption === 'confirmar' || avilableOption === 'anular'"
+      class="mt-10 mb-10"
+      mat-raised-button
+      color="warn"
+      (click)="closeOptions('anular')"
+    >
+      Cancelar cita
+    </button>
+  </div>
+</mat-dialog-content>

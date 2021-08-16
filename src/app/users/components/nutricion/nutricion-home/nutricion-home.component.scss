@@ -1,0 +1,23 @@
+$home-size: 200px;
+
+.home-logo{
+    width: $home-size;
+    height: $home-size;
+    font-size: $home-size;
+}
+
+img{    
+    max-width: 350px;
+    width: 60%;
+    height: auto;
+}
+
+h1,h3{
+    color: rgba(0,0,0,0.5)
+}
+
+@media(max-width:599px){
+    h1,h3{
+        text-align: center;
+    }
+}

@@ -1,0 +1,47 @@
+<div class="border-box mt-20" style="margin-bottom: 20%;">
+<div class="container w-80">
+  <h1>Envia mensajes a usuarios</h1>
+  <form [formGroup]="asignarUserForm" enctype="multipart/form-data" *ngIf="listadoUsuarios">
+    <div class="row">
+      <div class="col-xs-12 col-md-6 mt-20 mb-20">
+        <mat-form-field class="w-100">
+        <mat-label>Titulo</mat-label>
+          <input matInput formControlName="title" type="text" />
+        </mat-form-field>
+      </div>
+      <div class="col-xs-12 col-md-6 mt-20 mb-20">
+        <mat-form-field class="w-100">
+          <mat-label>Usuario</mat-label>
+          <mat-select formControlName="usuario">
+            <mat-option *ngFor="let usuario of listadoUsuarios" [value]="usuario.persona_id">
+              {{usuario.persona_nombres}} {{usuario.persona_apellidos}} 
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-xs-12 col-md-6 mt-20 mb-20">
+        <mat-form-field class="w-100">
+          <mat-label>Descripción</mat-label>
+          <textarea
+            matInput
+            formControlName="description"
+            cols="4"
+            type=""
+          ></textarea>
+        </mat-form-field>
+      </div>
+      <div class="col-xs-12 col-md-6 mt-20 mb-20">
+        <mat-form-field class="w-100">
+          <mat-label>Fecha</mat-label>
+          <input matInput formControlName="date" type="date" />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <button mat-raised-button color="primary">
+        Enviar
+      </button>
+    </div>
+  </form>
+</div>
+</div>

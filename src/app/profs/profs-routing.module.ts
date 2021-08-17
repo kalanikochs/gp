@@ -7,6 +7,7 @@ import { PlanesLayoutComponent } from './components/planes/planes-layout/planes-
 import { ListadoRutinasComponent } from '../shared/components/rutinas/listado-rutinas/listado-rutinas.component';
 import { ListadoEvidenciasComponent } from '../shared/components/evidencias/listado-evidencias/listado-evidencias.component';
 import { SwitchAlimentarioLayoutComponent } from './components/switch-alimentario/switch-alimentario-layout/switch-alimentario-layout.component';
+import { MessagesComponent } from './components/messages/messages.component';
 
 const routes: Routes = [
   {
@@ -42,6 +43,10 @@ const routes: Routes = [
         path: 'switchalimentario',
         component: SwitchAlimentarioLayoutComponent
       },
+      {
+        path: 'messages',
+        component: MessagesComponent
+      }
     ]
   }
 ];

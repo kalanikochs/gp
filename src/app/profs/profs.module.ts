@@ -20,7 +20,7 @@ import { ConfigurarSwitchAlimentarioComponent } from './components/switch-alimen
 import { SwitchAlimentarioLayoutComponent } from './components/switch-alimentario/switch-alimentario-layout/switch-alimentario-layout.component';
 import { AgregarAlimentoDialogComponent } from './components/dialogs/agregar-alimento-dialog/agregar-alimento-dialog.component';
 import { ModificarAlimentoDialogComponent } from './components/dialogs/modificar-alimento-dialog/modificar-alimento-dialog.component';
-
+import { MessagesComponent } from './components/messages/messages.component';
 @NgModule({
   declarations: [
     ProfsLayoutComponent,
@@ -37,7 +37,8 @@ import { ModificarAlimentoDialogComponent } from './components/dialogs/modificar
     ConfigurarSwitchAlimentarioComponent,
     SwitchAlimentarioLayoutComponent,
     AgregarAlimentoDialogComponent,
-    ModificarAlimentoDialogComponent
+    ModificarAlimentoDialogComponent,
+    MessagesComponent
   ],
   imports: [
     CommonModule,

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { UsersGuard } from './guards/users.guard';
-
+import { MessagesComponent } from './shared/components/messages/messages.component';
 const routes: Routes = [
   {
     path: '',
@@ -33,6 +33,10 @@ const routes: Routes = [
     path: 'tryout',
     loadChildren: () =>
       import('./tryout/tryout.module').then(m => m.TryoutModule)
+  },
+  {
+    path: 'mensajes',
+    component: MessagesComponent
   }
 ];
 

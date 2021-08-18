@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './messages.component.html',
   styleUrls: ['./messages.component.scss'],
 })
+
 export class MessagesComponent implements OnInit {
   asignarUserForm: FormGroup;
   listadoUsuarios: Persona[];
@@ -18,6 +19,7 @@ export class MessagesComponent implements OnInit {
   tiposCitas: any;
   showForm = true;
 
+  readonly VAPID_KEY = 'BO7HWId-ubQAgOCopZG4IUlavaO0bYUv8vcjA93AdVNAfS_Eh6yq3Duw8Vi_gaUGBnjyg99BPZ4P39_DROrBL4E'
   constructor(
     private formBuilder: FormBuilder,
     private httpRequest: HttpRequestService,
@@ -38,6 +40,18 @@ export class MessagesComponent implements OnInit {
     //await this.traerTipoCita();
 
     //this.showForm = true;
+  }
+
+  
+  subcribeToNotification(){
+    if(this.swUpdate.isEnabled) {
+      this.swPush.requestSubscrition({
+        serverPublickey: this.VAPID_KEY
+      })
+      .then(sub => {
+        this._ws.postSubscription(sub).subscribe();
+      })
+    }
   }
 
   private traerUsuarios() {

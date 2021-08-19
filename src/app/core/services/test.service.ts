@@ -56,7 +56,7 @@ export class TestService {
 
   setObs() {
     this.httpService
-      .getRequest('http://localhost/gastropack/api/')
+      .getRequest('http://localhost:4200/gastropack/api/')
       .subscribe(response => {
         console.log(response);
         this.obsBeh.next(response.message);

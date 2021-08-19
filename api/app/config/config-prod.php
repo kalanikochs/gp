@@ -7,7 +7,7 @@
     define('DB_PASSWORD','wRxB*~5}Ih%7');
     define('DB_NAME','ijxclrfi_gastropack');
     define('URL_PATH','https://entiven.com/api/');
-    define('STORAGE_PATH','https://entiven.com/api/storage/');
+    define('STORAGE_PATH','https://entiven.com/api/');
 
 
 ?>

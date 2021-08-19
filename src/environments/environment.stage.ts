@@ -1,7 +1,7 @@
 import { common } from './common';
 
 const stage = {
-  apiUrl: 'https://stagegastropack.hmsistemas.net',
+  apiUrl: 'https://entiven.com/api',
   stage: true
 };
 

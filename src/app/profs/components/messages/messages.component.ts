@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { Persona } from 'src/app/core/interfaces/persona.module';
 import { HttpRequestService } from 'src/app/core/services/http-request.service';
 import { environment } from 'src/environments/environment';
+import { SwPush } from '@angular/service-worker';
 
 @Component({
   selector: 'app-messages',
@@ -19,15 +20,20 @@ export class MessagesComponent implements OnInit {
   tiposCitas: any;
   showForm = true;
 
-  readonly VAPID_KEY = 'BO7HWId-ubQAgOCopZG4IUlavaO0bYUv8vcjA93AdVNAfS_Eh6yq3Duw8Vi_gaUGBnjyg99BPZ4P39_DROrBL4E'
+  private readonly publicKey = 'BNpl7wkG2moxWWiUHwcQSztroXmECyS6dTqkaqAB6hr31FGE3R5_K_DHhowSGo9p2cBRMwAfNrzzZOPiJk23NEg';
+  // readonly VAPID_KEY = 'BO7HWId-ubQAgOCopZG4IUlavaO0bYUv8vcjA93AdVNAfS_Eh6yq3Duw8Vi_gaUGBnjyg99BPZ4P39_DROrBL4E'
   constructor(
     private formBuilder: FormBuilder,
     private httpRequest: HttpRequestService,
+    private swPush: SwPush,
+    // readonly swPush: SwPush)
     //public dialogRef: MatDialogRef<SolicitarCitasDialogComponent>,
     //@Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   ngOnInit() {
+    this.pushSubscription();
+    this.swPush.messages.subscribe((message) => console.log(message));
     this.initForm();
     this.init();
   }
@@ -42,17 +48,16 @@ export class MessagesComponent implements OnInit {
     //this.showForm = true;
   }
 
-  
-  subcribeToNotification(){
-    if(this.swUpdate.isEnabled) {
-      this.swPush.requestSubscrition({
-        serverPublickey: this.VAPID_KEY
-      })
-      .then(sub => {
-        this._ws.postSubscription(sub).subscribe();
-      })
-    }
-  }
+  // subcribeToNotification(){
+  //   if(this.swUpdate.isEnabled) {
+  //     this.swPush.requestSubscrition({
+  //       serverPublickey: this.VAPID_KEY
+  //     })
+  //     .then(sub => {
+  //       this._ws.postSubscription(sub).subscribe();
+  //     })
+  //   }
+  // }
 
   private traerUsuarios() {
     return new Promise(resolve => {
@@ -74,26 +79,7 @@ export class MessagesComponent implements OnInit {
     });
   }
 
-  /*private traerTipoCita() {
-    return new Promise(resolve => {
-      const data = new FormData();
-      data.append('tipo_id', this.tipoProceso);
-      const thisUrl = environment.apiUrl + '/Users/Citas/mostrarTipoCita/';
-      this.httpRequest
-        .postRequest(thisUrl, data)
-        .pipe(
-          map(response =>
-            response.status === 'success' ? response.message : []
-          )
-        )
-        .subscribe(response => {
-          this.tiposCitas = response;
-          resolve(true);
-        });
-    });
-  }*/
-
-  initForm() {
+  private initForm() {
     this.asignarUserForm = this.formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
@@ -117,5 +103,37 @@ export class MessagesComponent implements OnInit {
       alert('Por favor revisa la información para continuar');
     }
   }*/
+
+    private async pushSubscription(){
+     if(!this.swPush.isEnabled){
+      console.log('La notificacion esta habilitada');
+      return;
+    }
+    this.swPush
+    .requestSubscription({
+      serverPublicKey: this.publicKey,
+    })
+    .then((sub) => {
+      console.log(JSON.stringify(sub));
+    })
+    .catch((err) => console.log(err));
+    }
+
+    // .catch(err => console.error('Could not subscribe to notification', err));
+
+
+
+  // private pushSubscription(){
+  //   if(!this.swPush.isEnabled){
+  //     console.log('La notificacion no esta habilitada');
+  //     return;
+  //   }
+  //   this.swPush.requestSubscription({
+  //     serverPublickey: this.publicKey;
+  //   })
+  //   .then((sub) => {
+  //     console.log(JSON.stringify(sub));
+  //   })
+  //    .catch((err => console.log));
 
 }

@@ -134,7 +134,6 @@
                 "output": "/assets"
               },
               "src/manifest.webmanifest",
-              "src/manifest.webmanifest",
               "src/OneSignalSDKUpdaterWorker.js",
               "src/OneSignalSDKWorker.js"
             ]

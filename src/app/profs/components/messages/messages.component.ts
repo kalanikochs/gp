@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 import { Persona } from 'src/app/core/interfaces/persona.module';
 import { HttpRequestService } from 'src/app/core/services/http-request.service';
 import { environment } from 'src/environments/environment';
-import {  ServiceWorkerModule, SwPush } from '@angular/service-worker';
+/* import {  ServiceWorkerModule, SwPush } from '@angular/service-worker'; */
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { MatSnackBarModule } from '@angular/material/snack-bar';
 // import {MDCSnackbar} from '@material/snackbar';

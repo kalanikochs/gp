@@ -1,3 +1,6 @@
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { AppComponent } from 'src/app/app.component';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -5,13 +8,33 @@ import { map } from 'rxjs/operators';
 import { Persona } from 'src/app/core/interfaces/persona.module';
 import { HttpRequestService } from 'src/app/core/services/http-request.service';
 import { environment } from 'src/environments/environment';
-import { SwPush } from '@angular/service-worker';
+import {  ServiceWorkerModule, SwPush } from '@angular/service-worker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// import { MatSnackBarModule } from '@angular/material/snack-bar';
+// import {MDCSnackbar} from '@material/snackbar';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-messages',
   templateUrl: './messages.component.html',
   styleUrls: ['./messages.component.scss'],
 })
+
+// @NgModule({
+//   declarations: [
+//     AppComponent
+//   ],
+//   imports: [
+//     BrowserModule,
+//     // MDCSnackbar,
+//     MatSnackBar,
+//     BrowserAnimationsModule,
+
+//     ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production})
+//   ],
+//   providers: [],
+//   bootstrap: [AppComponent]
+// })
 
 export class MessagesComponent implements OnInit {
   asignarUserForm: FormGroup;
@@ -25,15 +48,23 @@ export class MessagesComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private httpRequest: HttpRequestService,
-    private swPush: SwPush,
+    // private swPush: SwPush,
+    // private snackbar: MDCSnackbar,
+    private _snackBar: MatSnackBar,
     // readonly swPush: SwPush)
     //public dialogRef: MatDialogRef<SolicitarCitasDialogComponent>,
     //@Inject(MAT_DIALOG_DATA) public data: any
-  ) { }
+  ) {
+
+   }
+    openSnackBar(title: string, description: string) {
+    this._snackBar.open(title, description);
+  }
+
 
   ngOnInit() {
-    this.pushSubscription();
-    this.swPush.messages.subscribe((message) => console.log(message));
+    // this.pushSubscription();
+    // this.swPush.messages.subscribe((message) => console.log(message));
     this.initForm();
     this.init();
   }
@@ -47,17 +78,6 @@ export class MessagesComponent implements OnInit {
 
     //this.showForm = true;
   }
-
-  // subcribeToNotification(){
-  //   if(this.swUpdate.isEnabled) {
-  //     this.swPush.requestSubscrition({
-  //       serverPublickey: this.VAPID_KEY
-  //     })
-  //     .then(sub => {
-  //       this._ws.postSubscription(sub).subscribe();
-  //     })
-  //   }
-  // }
 
   private traerUsuarios() {
     return new Promise(resolve => {
@@ -79,7 +99,7 @@ export class MessagesComponent implements OnInit {
     });
   }
 
-  private initForm() {
+   initForm() {
     this.asignarUserForm = this.formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
@@ -104,20 +124,21 @@ export class MessagesComponent implements OnInit {
     }
   }*/
 
-    private async pushSubscription(){
-     if(!this.swPush.isEnabled){
-      console.log('La notificacion esta habilitada');
-      return;
-    }
-    this.swPush
-    .requestSubscription({
-      serverPublicKey: this.publicKey,
-    })
-    .then((sub) => {
-      console.log(JSON.stringify(sub));
-    })
-    .catch((err) => console.log(err));
-    }
+  //  pushSubscription(){
+  //    if(!this.swPush.isEnabled){
+  //     console.log('La notificacion esta habilitada');
+  //     return;
+  //   }
+  //   this.swPush
+  //   .requestSubscription({
+  //     serverPublicKey: this.publicKey,
+  //   })
+  //   .then((sub) => {
+  //     console.log(JSON.stringify(sub));
+  //   })
+  //   .catch((err) => console.log(err));
+  //   }
+
 
     // .catch(err => console.error('Could not subscribe to notification', err));
 

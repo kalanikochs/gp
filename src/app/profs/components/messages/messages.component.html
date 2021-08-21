@@ -6,7 +6,7 @@
       <div class="col-xs-12 col-md-6 mt-20 mb-20">
         <mat-form-field class="w-100">
         <mat-label>Titulo</mat-label>
-          <input matInput formControlName="title" type="text" />
+          <input matInput formControlName="title" type="text" #title />
         </mat-form-field>
       </div>
       <div class="col-xs-12 col-md-6 mt-20 mb-20">
@@ -14,7 +14,7 @@
           <mat-label>Usuario</mat-label>
           <mat-select formControlName="usuario">
             <mat-option *ngFor="let usuario of listadoUsuarios" [value]="usuario.persona_id">
-              {{usuario.persona_nombres}} {{usuario.persona_apellidos}} 
+              {{usuario.persona_nombres}} {{usuario.persona_apellidos}}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -27,21 +27,36 @@
             formControlName="description"
             cols="4"
             type=""
+            #description
           ></textarea>
         </mat-form-field>
       </div>
       <div class="col-xs-12 col-md-6 mt-20 mb-20">
         <mat-form-field class="w-100">
           <mat-label>Fecha</mat-label>
-          <input matInput formControlName="date" type="date" />
+          <input matInput formControlName="date" type="date" #date />
         </mat-form-field>
       </div>
     </div>
     <div class="row">
-      <button (click)="subcribeToNotifications()" mat-raised-button color="primary">
+      <!-- <button (click)="subcribeToNotifications()" mat-raised-button color="primary">
         Enviar
-      </button>
+      </button> -->
+      <button mat-stroked-button (click)="openSnackBar(message.value, action.value)">Enviar</button>
+
     </div>
   </form>
+        <!-- <mat-form-field appearance="fill">
+          <mat-label>Message</mat-label>
+          <input matInput value="Disco party!" #message>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Action</mat-label>
+          <input matInput value="Dance" #action>
+        </mat-form-field> -->
+
+        <button mat-stroked-button (click)="openSnackBar(message.value, action.value)">Show snack-bar</button>
+
 </div>
 </div>

@@ -26,6 +26,16 @@ class Notifications extends Controller{
 
     }
 
+    function sendNotifications(){
+       $notifications = ['notificaciones'=>$this->model->sendNotifications()] ;
+
+       $success = successFailure(true);
+       $response = array_merge($success,$notifications);
+
+       printJSON($response);
+
+    }
+
     function readnotifications(){
                             
         $update = $this->model->updateNotifications();

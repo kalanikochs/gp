@@ -19,12 +19,13 @@ class UsersModel{
             p.persona_direccion,
             p.persona_direccion,
             p.estado_persona_id,
+            p.push_id,
             concat('Profesional ', ep.estado_persona_desc) as persona_estado_nombre
             from persona p
             join tipo_persona tp on p.tipo_persona_id = tp.tipo_persona_id
-            join estado_persona ep on p.estado_persona_id = ep.estado_persona_id
+            join estado_persona ep on p.estado_persona_id = ep.estado_persona_id 
             where p.tipo_persona_id in (1)
-            and p.estado_persona_id not in (2);           
+            and p.estado_persona_id not in (2);               
         ";
 
         $this->db->query($query);

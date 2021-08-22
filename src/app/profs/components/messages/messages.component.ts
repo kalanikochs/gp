@@ -10,9 +10,10 @@ import { HttpRequestService } from 'src/app/core/services/http-request.service';
 import { environment } from 'src/environments/environment';
 /* import {  ServiceWorkerModule, SwPush } from '@angular/service-worker'; */
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { OneSignalService } from 'src/app/services/one-signal.service';
 // import { MatSnackBarModule } from '@angular/material/snack-bar';
 // import {MDCSnackbar} from '@material/snackbar';
-import {MatSnackBar} from '@angular/material/snack-bar';
+/* import {MatSnackBar} from '@angular/material/snack-bar'; */
 
 @Component({
   selector: 'app-messages',
@@ -48,18 +49,19 @@ export class MessagesComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private httpRequest: HttpRequestService,
+    private os: OneSignalService
     // private swPush: SwPush,
     // private snackbar: MDCSnackbar,
-    private _snackBar: MatSnackBar,
+    /* private _snackBar: MatSnackBar, */
     // readonly swPush: SwPush)
     //public dialogRef: MatDialogRef<SolicitarCitasDialogComponent>,
     //@Inject(MAT_DIALOG_DATA) public data: any
   ) {
 
-   }
-    openSnackBar(title: string, description: string) {
-    this._snackBar.open(title, description);
   }
+  /* openSnackBar(title: string, description: string) {
+  this._snackBar.open(title, description);
+} */
 
 
   ngOnInit() {
@@ -99,7 +101,7 @@ export class MessagesComponent implements OnInit {
     });
   }
 
-   initForm() {
+  initForm() {
     this.asignarUserForm = this.formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
@@ -107,6 +109,11 @@ export class MessagesComponent implements OnInit {
       date: ['', Validators.required],
       //tipo: [ `${this.data.tipoProceso}` , Validators.required]
     });
+  }
+
+  sendMessage(){
+    console.log(this.asignarUserForm.value);
+    this.os.sendNotifications(this.asignarUserForm.value);
   }
 
   /*submitForm() {
@@ -140,7 +147,7 @@ export class MessagesComponent implements OnInit {
   //   }
 
 
-    // .catch(err => console.error('Could not subscribe to notification', err));
+  // .catch(err => console.error('Could not subscribe to notification', err));
 
 
 

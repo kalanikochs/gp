@@ -13,7 +13,7 @@
         <mat-form-field class="w-100">
           <mat-label>Usuario</mat-label>
           <mat-select formControlName="usuario">
-            <mat-option *ngFor="let usuario of listadoUsuarios" [value]="usuario.persona_id">
+            <mat-option *ngFor="let usuario of listadoUsuarios" [value]="usuario.push_id">
               {{usuario.persona_nombres}} {{usuario.persona_apellidos}}
             </mat-option>
           </mat-select>
@@ -42,7 +42,7 @@
       <!-- <button (click)="subcribeToNotifications()" mat-raised-button color="primary">
         Enviar
       </button> -->
-      <button mat-stroked-button (click)="openSnackBar(message.value, action.value)">Enviar</button>
+      <button mat-stroked-button (click)="sendMessage()">Enviar</button>
 
     </div>
   </form>
@@ -56,7 +56,7 @@
           <input matInput value="Dance" #action>
         </mat-form-field> -->
 
-        <button mat-stroked-button (click)="openSnackBar(message.value, action.value)">Show snack-bar</button>
+        <!-- <button mat-stroked-button (click)="openSnackBar(message.value, action.value)">Show snack-bar</button> -->
 
 </div>
 </div>

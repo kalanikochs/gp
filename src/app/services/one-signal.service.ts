@@ -60,4 +60,32 @@ export class OneSignalService {
       });
     });
   }
+
+  sendNotifications(info) {
+    let url = `${environment.apiUrl}/common/notifications/sendNotifications/`;
+
+    let title = (info.title) ? info.title : '';
+    let description = (info.description) ? info.description : '';
+    let usuario = (info.usuario) ? info.usuario : '';
+    let date = (info.date) ? info.date : '';
+    
+    const data = new FormData();
+    data.append('title', title);
+    data.append('description', description);
+    data.append('usuario', usuario);
+    data.append('date', date);
+
+    if(!usuario) return;
+    
+    this.httpRequest
+      .postRequest(url, data)
+      .pipe(
+        map(response => {
+          console.log(response)
+        })
+      )
+      .subscribe(response => {
+        console.log(response)
+      });
+  }
 }

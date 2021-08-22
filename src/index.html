@@ -33,14 +33,24 @@
 
   <!--Onesignal notification push-->
   <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-  <script>
+  <!-- <script>
     window.OneSignal = window.OneSignal || [];
     OneSignal.push(function () {
       OneSignal.init({
         appId: "c62835e1-5eb7-4af5-be25-082a71fdbeac",
       });
+      OneSignal.on('subscriptionChange', function (isSubscribed) {
+        console.log('is subscribed', isSubscribed);
+        OneSignal.push(function () {
+          console.log('attempt to get id'); // doesn't get this far
+          OneSignal.getUserId(function (userId) {
+            console.log('user id', userId); // doesn't get this far                
+          });
+        });
+      });
     });
-  </script>
+
+  </script> -->
   <!--End Onesignal notification push-->
 
 </head>

@@ -13,6 +13,7 @@ import { AcceptDeclineDialogComponent } from 'src/app/shared/components/dialogs/
 import { ProfileDialogComponent } from 'src/app/shared/components/dialogs/profile-dialog/profile-dialog.component';
 import { NotificationsDialogComponent } from 'src/app/shared/components/dialogs/notifications-dialog/notifications-dialog.component';
 import { environment } from 'src/environments/environment';
+import { OneSignalService } from 'src/app/services/one-signal.service';
 
 @Component({
   selector: 'app-profs-layout',
@@ -44,7 +45,8 @@ export class ProfsLayoutComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private httpService: HttpRequestService,
     private title: Title,
-    private overlayContainer: OverlayContainer
+    private overlayContainer: OverlayContainer,
+    private os: OneSignalService
   ) {
     this.setTitle();
     this.setMaterialContainer();
@@ -65,6 +67,9 @@ export class ProfsLayoutComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.os.onInit().then((player_id)=>{
+      this.os.savePlayer(player_id);
+    });
     this.init();
   }
 

@@ -1,7 +1,7 @@
 import { common } from './common';
 
 const local = {
-  apiUrl: 'https://entiven.com/api'
+  apiUrl: 'http://localhost/api'
 };
 
 export const environment = Object.assign(common, local);

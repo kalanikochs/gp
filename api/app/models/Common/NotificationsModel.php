@@ -43,10 +43,11 @@ class NotificationsModel
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => '{
                 "app_id": "c62835e1-5eb7-4af5-be25-082a71fdbeac",
-                "headings": {"en": "'.$title.'"}
+                "headings": {"en": "'.$title.'"},
                 "contents": {"en": "'.$description.'"},
                 "include_player_ids": ["'.$usuario.'"],
                 "data": {"test": "test"},
+                "send_after": "'.$date.' GMT-5"
             }',
             CURLOPT_HTTPHEADER => array(
                 'Content-Type: application/json; charset=utf-8',

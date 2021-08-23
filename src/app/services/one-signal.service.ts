@@ -15,6 +15,9 @@ export class OneSignalService {
       this.onLoad().then((OneSignal) => {
         OneSignal.init({
           appId: "c62835e1-5eb7-4af5-be25-082a71fdbeac",
+          httpPermissionRequest: {
+            enable: true,
+          },
         });
         OneSignal.on('subscriptionChange', function (isSubscribed) {
 
@@ -29,7 +32,11 @@ export class OneSignalService {
 
         });
       });
+
+
+
     })
+
   }
 
   savePlayer(player_id) {
@@ -68,15 +75,15 @@ export class OneSignalService {
     let description = (info.description) ? info.description : '';
     let usuario = (info.usuario) ? info.usuario : '';
     let date = (info.date) ? info.date : '';
-    
+
     const data = new FormData();
     data.append('title', title);
     data.append('description', description);
     data.append('usuario', usuario);
     data.append('date', date);
 
-    if(!usuario) return;
-    
+    if (!usuario) return;
+
     this.httpRequest
       .postRequest(url, data)
       .pipe(

@@ -14,7 +14,7 @@ export class OneSignalService {
     return new Promise<void>((resolve, reject) => {
       this.onLoad().then((OneSignal) => {
         OneSignal.init({
-          appId: "c62835e1-5eb7-4af5-be25-082a71fdbeac",
+          appId: "949d218f-1a5d-4f1b-9dd0-ea8999076061",
           httpPermissionRequest: {
             enable: true,
           },

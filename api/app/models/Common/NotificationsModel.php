@@ -42,7 +42,7 @@ class NotificationsModel
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => '{
-                "app_id": "c62835e1-5eb7-4af5-be25-082a71fdbeac",
+                "app_id": "949d218f-1a5d-4f1b-9dd0-ea8999076061",
                 "headings": {"en": "'.$title.'"},
                 "contents": {"en": "'.$description.'"},
                 "include_player_ids": ["'.$usuario.'"],
@@ -51,7 +51,7 @@ class NotificationsModel
             }',
             CURLOPT_HTTPHEADER => array(
                 'Content-Type: application/json; charset=utf-8',
-                'Authorization: Basic NGNlNWZhZmMtOGZmNS00MzRiLTljN2ItZDg3MzNiZmY0ZDZh'
+                'Authorization: Basic MmMyYWQ2YzAtNWQ0My00NjdjLWJiOTEtOWMwY2VhN2IxM2Uz'
             ),
         ));
 

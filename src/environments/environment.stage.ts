@@ -1,7 +1,7 @@
 import { common } from './common';
 
 const stage = {
-  apiUrl: 'http://localhost/api',
+  apiUrl: 'https://entiven.com/api'
   stage: true
 };
 

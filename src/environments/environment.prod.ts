@@ -2,7 +2,7 @@ import { common } from './common';
 
 const production = {
   production: true,
-  apiUrl: 'http://localhost/api'
+  apiUrl: 'https://entiven.com/api'
 };
 
 export const environment = Object.assign(common, production);

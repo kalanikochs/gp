@@ -114,6 +114,32 @@ export class MessagesComponent implements OnInit {
   sendMessage(){
     console.log(this.asignarUserForm.value);
     this.os.sendNotifications(this.asignarUserForm.value);
+
+    //if(this.asignarUserForm.valid) {
+      const url = 'https://onesignal.com/api/v1/notifications'
+      const data = {
+        app_id: "949d218f-1a5d-4f1b-9dd0-ea8999076061",
+        include_player_ids: [this.asignarUserForm.value.usuario],
+        data: {"foo": "bar"},
+        contents: {"en": this.asignarUserForm.value.description}
+      }
+      fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+          "Authorization": "Basic NGEwMGZmMjItY2NkNy0xMWUzLTk5ZDUtMDAwYzI5NDBlNjJj"
+        }
+      })
+      .then(function(res) {
+        return res.json()
+      })
+      .then(function(data) {
+        console.log(data)
+      })
+      .catch(err => console.error(err))
+
+    //}
   }
 
   /*submitForm() {

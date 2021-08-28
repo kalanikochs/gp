@@ -1,7 +1,8 @@
 {
   "name": "gastropack",
   "integrations": {
-    "cordova": {}
+    "cordova": {},
+    "capacitor": {}
   },
   "type": "angular"
 }

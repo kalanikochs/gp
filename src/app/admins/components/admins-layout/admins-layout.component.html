@@ -9,6 +9,7 @@
         <a mat-list-item routerLink="planes">Listado de planes</a>
         <a mat-list-item routerLink="profesionales">Gestión de profesionales</a>
         <a mat-list-item routerLink="usuarios">Gestión de usuarios</a>
+        <a mat-list-item routerLink="messages">Mensajes</a>
         <a *ngIf="(isHandset$ | async)" mat-list-item (click)="openProfile()">Perfil</a>
         <!-- <a *ngIf="(isHandset$ | async)" mat-list-item (click)="openNotifications()">Notificaciones <span class="ml-20" matBadge="{{notifications$.length}}" matBadgeColor="warn"></span></a> -->
         <a *ngIf="(isHandset$ | async)" mat-list-item (click)="logout()">Cerrar Sesión</a>

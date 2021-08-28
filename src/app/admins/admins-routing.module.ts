@@ -10,7 +10,7 @@ import { PlanesLayoutComponent } from './components/planes/planes-layout/planes-
 import { PlanesPendientesComponent } from './components/planes/planes-pendientes/planes-pendientes.component';
 import { ListadoProfesionalesComponent } from './components/profesionales/listado-profesionales/listado-profesionales.component';
 import { ListadoUsuariosComponent } from './components/usuarios/listado-usuarios/listado-usuarios.component';
-
+import { MessagesComponent } from '../profs/components/messages/messages.component';
 
 const routes: Routes = [
   {
@@ -50,6 +50,10 @@ const routes: Routes = [
         path: 'usuarios',
         component: ListadoUsuariosComponent
       },
+      {
+        path: 'messages',
+        component: MessagesComponent
+      }
 
     ]
   }

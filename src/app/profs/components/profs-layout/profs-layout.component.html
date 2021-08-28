@@ -6,7 +6,6 @@
       <mat-nav-list>
         <a mat-list-item routerLink="citas">Listado de citas {{tipoCitasPlanes}}</a>
         <a mat-list-item routerLink="planes">Listado de planes {{tipoCitasPlanes}}</a>
-        <a mat-list-item routerLink="messages">Mensajes</a>
         <a mat-list-item routerLink="switchalimentario" *ngIf="userLogin$ && userLogin$.type == '4'">Configurar Switch
           Alimentario</a>
         <a *ngIf="(isHandset$ | async)" mat-list-item (click)="openProfile()">Perfil</a>

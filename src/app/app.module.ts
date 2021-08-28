@@ -13,6 +13,8 @@ import { Camera } from '@ionic-native/camera/ngx';
 import { StatusBar} from '@ionic-native/status-bar/ngx';
 /* import { ServiceWorkerModule } from '@angular/service-worker'; */
 import { environment } from '../environments/environment';
+
+import { OneSignal } from '@ionic-native/onesignal/ngx';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -35,7 +37,8 @@ import { environment } from '../environments/environment';
     StatusBar,
     Camera,
     Title,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    OneSignal,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],
   bootstrap: [AppComponent]
 })

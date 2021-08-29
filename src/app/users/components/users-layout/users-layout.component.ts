@@ -16,10 +16,6 @@ import { NotificationsDialogComponent } from 'src/app/shared/components/dialogs/
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { OneSignalService } from 'src/app/services/one-signal.service';
 
-import { Platform, AlertController } from '@ionic/angular';
-
-import { OneSignal } from '@ionic-native/onesignal/ngx';
-
 @Component({
   selector: 'app-users-layout',
   templateUrl: './users-layout.component.html',
@@ -49,24 +45,15 @@ export class UsersLayoutComponent implements OnInit, OnDestroy {
     private httpService: HttpRequestService,
     private title: Title,
     private overlayContainer: OverlayContainer,
-    private os: OneSignalService,
-    private platform: Platform,
-    private alertCtrl: AlertController,
-    private _oneSignal: OneSignal
-    
+    private os: OneSignalService
     ) {
     this.setTitle();
     this.setMaterialContainer();
-    const subscription1 = this.isHandset$.subscribe(value => {
+    /*const subscription1 = this.isHandset$.subscribe(value => {
       this.isHandsetValue = value;
     });
-    this.subscriptions.push(subscription1);
+    this.subscriptions.push(subscription1);*/
 
-    this.platform.ready().then(() => {
-      if (this.platform.is('cordova')) {
-        this.setupPush();
-      }
-    });
   }
 
   setTitle() {
@@ -95,69 +82,11 @@ export class UsersLayoutComponent implements OnInit, OnDestroy {
             this.userLogin$ = userInfo;
           }
         );
-        this.subscriptions.push(subscription2);
+        //this.subscriptions.push(subscription2);
       } else {
         this.router.navigate(['/home']);
       }
     });
-  }
-
-  setupPush() {
-    this._oneSignal.startInit('949d218f-1a5d-4f1b-9dd0-ea8999076061', '883132740611');
-    //this._oneSignal.setLogLevel({6,0});
-    this._oneSignal.inFocusDisplaying(this._oneSignal.OSInFocusDisplayOption.Notification);
-    //this._oneSignal.setSubscription(true);
-    this._oneSignal.handleNotificationReceived().subscribe(data => {
-      let msg = data.payload.body;
-      let title = data.payload.title;
-      let additionalData = data.payload.additionalData;
-      this.showAlert(title, msg, additionalData.task);
-    });
-
-    this._oneSignal.handleNotificationOpened().subscribe(data => {
-      let additionalData = data.notification.payload.additionalData;
-      this.showAlert('Notification opened', 'You already read this before', additionalData.task);
-    });
-
-    this._oneSignal.endInit();
-
-    /*this._oneSignal.getIds().then(identity => {
-      let gsId = sessionStorage.getItem('gsId');
-      let player_id = identity.userId;
-
-      alert(player_id);
-
-      let url = `${environment.apiUrl}/common/profile/pushIdRegister`
-      const data = new FormData();
-      data.append('push_id', player_id);
-      data.append('user_id', gsId);
-      this.httpService
-        .postRequest(url, data)
-        .pipe(
-          map(response => {
-            console.log(response)
-          })
-        )
-        .subscribe(response => {
-          console.log(response)
-      });
-    })*/
-  }
-
-  async showAlert(title, msg, task) {
-    const alert = await this.alertCtrl.create({
-      header: title,
-      subHeader: msg,
-      buttons: [
-        {
-          text: `Action: ${task}`,
-          handler: () => {
-            // E.g: Navigate to a specific screen
-          }
-        }
-      ]
-    })
-    alert.present();
   }
 
   checkNotifications() {

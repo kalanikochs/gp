@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 
 import { Platform, AlertController } from '@ionic/angular';
 
-import { OneSignal } from '@ionic-native/onesignal/ngx';
+import { OneSignal, OSNotification } from '@ionic-native/onesignal/ngx';
 
 
 @Injectable({
@@ -17,79 +17,92 @@ export class OneSignalService {
     private httpRequest: HttpRequestService,
     private platform: Platform,
     private alertCtrl: AlertController,
-    private oneSignal: OneSignal
-    ) { }
+    private _oneSignal: OneSignal
+  ) { }
 
   onInit() {
-    return new Promise<void>((resolve, reject) => {
-      this.onLoad().then((OneSignal) => {
-        OneSignal.init({
-          appId: "949d218f-1a5d-4f1b-9dd0-ea8999076061",
-          httpPermissionRequest: {
-            enable: true,
-          },
-        });
-        OneSignal.on('subscriptionChange', function (isSubscribed) {
-
-          OneSignal.push(function () {
-
-            OneSignal.getUserId(function (player_id) {
-              console.log('player_id id', player_id);
-              resolve(player_id);
-
-            });
-          });
-
-        });
-      });
-
-
-
-    })
-
-    this.platform.ready().then(() => {
-      if(this.platform.is('cordova')) {
+    if (this.platform.is('cordova')) {
+      this.platform.ready().then(() => {
+        console.log('ready platform');
         this.setupPush();
-      }
-    });
-
+      });
+    }else{
+      return new Promise<void>((resolve, reject) => {
+        this.onLoad().then((OneSignal) => {
+          OneSignal.init({
+            appId: "949d218f-1a5d-4f1b-9dd0-ea8999076061",
+            httpPermissionRequest: {
+              enable: true,
+            },
+          });
+          OneSignal.on('subscriptionChange', function (isSubscribed) {
+  
+            OneSignal.push(function () {
+  
+              OneSignal.getUserId(function (player_id) {
+                console.log('player_id id', player_id);
+                resolve(player_id);
+  
+              });
+            });
+  
+          });
+        });
+      })
+    }
   }
 
   setupPush() {
 
-    this.oneSignal.startInit('949d218f-1a5d-4f1b-9dd0-ea8999076061', '883132740611');
+    this._oneSignal.startInit('949d218f-1a5d-4f1b-9dd0-ea8999076061', '883132740611');
 
-    this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.None);
+    this._oneSignal.inFocusDisplaying(this._oneSignal.OSInFocusDisplayOption.Notification);
 
-    this.oneSignal.getPermissionSubscriptionState();
+    this._oneSignal.getPermissionSubscriptionState();
     // Notifcation was received in general
-    this.oneSignal.handleNotificationReceived().subscribe(data => {
-      let msg = data.payload.body;
+    this._oneSignal.handleNotificationReceived().subscribe(notification => {
+     /*  let msg = data.payload.body;
       let title = data.payload.title;
       let additionalData = data.payload.additionalData;
-      this.showAlert(title, msg, additionalData);
+      this.showAlert(title, msg, additionalData); */
+      this.receivedNotification(notification);
+      console.log('notificacion recibida');
     });
 
     // Notification was really clicked/opened
-    this.oneSignal.handleNotificationOpened().subscribe(data => {
-      let msg = data.notification.payload.body;
+    this._oneSignal.handleNotificationOpened().subscribe(async notification => {
+      /* let msg = data.notification.payload.body;
       let title = data.notification.payload.title;
       // Just a note that the data is a different place here!
       let additionalData = data.notification.payload.additionalData;
 
-      this.showAlert(title, msg, additionalData);
+      this.showAlert(title, msg, additionalData); */
+      await this.receivedNotification(notification.notification);
+      console.log('notificacion abierta');
     });
 
-    this.oneSignal.endInit();
+    this.getID();
+
+    this._oneSignal.endInit();
   }
 
-  async showAlert(title, msg, task) {
+  getID(){
+    this._oneSignal.getIds().then( info => {
+      this.savePlayer(info.userId);
+    })
+  }
+
+  async receivedNotification(notification: OSNotification) {
+    console.log(notification.payload.title)
+    this.showAlert(notification.payload.title, notification.payload.body);
+  }
+
+  async showAlert(title, msg) {
     const alert = await this.alertCtrl.create({
       header: title,
-      subHeader: msg,
       buttons: [
         {
-          text: `Action: ${task}`,
+          text: msg,
           handler: () => {
             // E.g: Navigate to a specific screen
           }

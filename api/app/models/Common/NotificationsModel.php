@@ -25,40 +25,47 @@ class NotificationsModel
 
     function sendNotifications()
     {
+        textHeaders();
         $title = isset($_REQUEST['title']) ? $_REQUEST['title'] : '';
         $description = isset($_REQUEST['description']) ? $_REQUEST['description'] : '';
-        $usuario = isset($_REQUEST['usuario']) ? $_REQUEST['usuario'] : '';
+        $usuarios = isset($_REQUEST['usuario']) ? $_REQUEST['usuario'] : '';
         $date = isset($_REQUEST['date']) ? $_REQUEST['date'] : '';
 
-        $curl = curl_init();
+        $users = explode(',', $usuarios);
 
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://onesignal.com/api/v1/notifications',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => '{
-                "app_id": "949d218f-1a5d-4f1b-9dd0-ea8999076061",
-                "headings": {"en": "'.$title.'"},
-                "contents": {"en": "'.$description.'"},
-                "include_player_ids": ["'.$usuario.'"],
-                "data": {"test": "test"},
-                "send_after": "'.$date.' GMT-5"
-            }',
-            CURLOPT_HTTPHEADER => array(
+        $fields = array(
+            'app_id' => "949d218f-1a5d-4f1b-9dd0-ea8999076061",
+            'include_player_ids' => $users,
+            'data' => array("test" => "test"),
+            'headings' => array(
+                'en' => $title
+            ),
+            'contents' => array(
+                "en" => $description
+            ),
+            'send_afert' => $date. ' GMT-5'
+        );
+
+        $fields = json_encode($fields);
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
+        curl_setopt($ch, CURLOPT_HTTPHEADER,
+            [
                 'Content-Type: application/json; charset=utf-8',
                 'Authorization: Basic MmMyYWQ2YzAtNWQ0My00NjdjLWJiOTEtOWMwY2VhN2IxM2Uz'
-            ),
-        ));
+            ]
+        );
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_HEADER, FALSE);
+        curl_setopt($ch, CURLOPT_POST, TRUE);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 
-        $response = curl_exec($curl);
+        $response = curl_exec($ch);
+        curl_close($ch);
 
-        curl_close($curl);
-        echo $response;
+        return $fields;
         /* if (!isset($_REQUEST['id'])) {
             return [];
         }

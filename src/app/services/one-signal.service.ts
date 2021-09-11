@@ -156,6 +156,8 @@ export class OneSignalService {
     data.append('usuario', usuario);
     data.append('date', date);
 
+    console.log(usuario)
+
     if (!usuario) return;
 
     this.httpRequest

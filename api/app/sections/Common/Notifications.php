@@ -32,7 +32,7 @@ class Notifications extends Controller{
        $success = successFailure(true);
        $response = array_merge($success,$notifications);
 
-       printJSON($response);
+       printJSON($notifications);
 
     }
 

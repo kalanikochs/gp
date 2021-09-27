@@ -18,8 +18,13 @@ import { ResultadoCitaDialogComponent } from './components/dialogs/resultado-cit
 import { ListadoPlanesComponent } from './components/planes/listado-planes/listado-planes.component';
 import { ConfigurarSwitchAlimentarioComponent } from './components/switch-alimentario/configurar-switch-alimentario/configurar-switch-alimentario.component';
 import { SwitchAlimentarioLayoutComponent } from './components/switch-alimentario/switch-alimentario-layout/switch-alimentario-layout.component';
+import { ConfigurarSwitchDeportivoComponent } from './components/switch-deportivo/configurar-switch-deportivo/configurar-switch-deportivo.component';
+import { ConfigurarGrupoMuscularComponent } from './components/switch-deportivo/configurar-grupo-muscular/configurar-grupo-muscular.component';
+import { SwitchDeportivoLayoutComponent } from './components/switch-deportivo/switch-deportivo-layout/switch-deportivo-layout.component';
 import { AgregarAlimentoDialogComponent } from './components/dialogs/agregar-alimento-dialog/agregar-alimento-dialog.component';
+import { AgregarEjercicioDialogComponent } from './components/dialogs/agregar-ejercicio-dialog/agregar-ejercicio-dialog.component';
 import { ModificarAlimentoDialogComponent } from './components/dialogs/modificar-alimento-dialog/modificar-alimento-dialog.component';
+import { ModificarEjercicioDialogComponent } from './components/dialogs/modificar-ejercicio-dialog/modificar-ejercicio-dialog.component';
 import { MessagesComponent } from './components/messages/messages.component';
 @NgModule({
   declarations: [
@@ -36,8 +41,13 @@ import { MessagesComponent } from './components/messages/messages.component';
     ListadoPlanesComponent,
     ConfigurarSwitchAlimentarioComponent,
     SwitchAlimentarioLayoutComponent,
+    ConfigurarSwitchDeportivoComponent,
+    ConfigurarGrupoMuscularComponent,
+    SwitchDeportivoLayoutComponent,
     AgregarAlimentoDialogComponent,
+    AgregarEjercicioDialogComponent,
     ModificarAlimentoDialogComponent,
+    ModificarEjercicioDialogComponent,
     MessagesComponent
   ],
   imports: [
@@ -53,7 +63,9 @@ import { MessagesComponent } from './components/messages/messages.component';
     CitasOptionsDialogComponent,
     ResultadoCitaDialogComponent,
     AgregarAlimentoDialogComponent,
-    ModificarAlimentoDialogComponent
+    AgregarEjercicioDialogComponent,
+    ModificarAlimentoDialogComponent,
+    ModificarEjercicioDialogComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

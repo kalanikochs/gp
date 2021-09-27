@@ -27,7 +27,9 @@ import { IsLinkPipe } from './pipes/is-link.pipe';
 import { IsVideoPipe } from './pipes/is-video.pipe';
 import { OpcionesPlanDialogComponent } from './components/dialogs/opciones-plan-dialog/opciones-plan-dialog.component';
 import { CreacionDietaComponent } from './components/rutinas/creacion-dieta/creacion-dieta.component';
+import { CreacionEjercicioComponent } from './components/rutinas/creacion-ejercicio/creacion-ejercicio.component';
 import { VerDietaComponent } from './components/rutinas/ver-dieta/ver-dieta.component';
+import { VerEjercicioComponent } from './components/rutinas/ver-ejercicio/ver-ejercicio.component';
 import { AlimentosUploadComponent } from './components/evidencias/alimentos-upload/alimentos-upload.component';
 import { AlimentosViewComponent } from './components/evidencias/alimentos-view/alimentos-view.component';
 import { EvidenciasUploadMobileDialogComponent } from './components/dialogs/evidencias-upload-mobile-dialog/evidencias-upload-mobile-dialog.component';
@@ -57,7 +59,9 @@ import { SwitchAlimentosDialogComponent } from './components/dialogs/switch-alim
     IsLinkPipe,
     IsVideoPipe,
     CreacionDietaComponent,
+    CreacionEjercicioComponent,
     VerDietaComponent,
+    VerEjercicioComponent,
     AlimentosUploadComponent,
     AlimentosViewComponent,
     SwitchAlimentosDialogComponent

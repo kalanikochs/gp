@@ -91,6 +91,15 @@
     <app-ver-dieta (switchAlimentario)="cerrarConSwitch($event)" [informacion]="data" [userLogin$]="userLogin$"></app-ver-dieta>
   </ng-container>
 
+  <ng-container *ngIf="data.plan.plan_tipo === '2'">
+    <h3>Rutina de ejercicios</h3>
+    <h5 class="color-accent">** Aplica sólo para planes deportivos</h5>
+    <div *ngIf="userLogin$.type =='1' && data.plan.plan_estado_id=='1'">
+      <h5 class="color-accent">** Para realizar un switch de deporte, {{accion}} sobre el ejercicio que desees cambiar</h5>    
+    </div>
+    <app-ver-ejercicio (switchAlimentario)="cerrarConSwitch($event)" [informacion]="data" [userLogin$]="userLogin$"></app-ver-ejercicio>
+  </ng-container>
+
 </mat-dialog-content>
 <mat-dialog-actions class="flex center-xs end-md">
   <button mat-raised-button color="accent" cdkFocusInitial mat-dialog-close>

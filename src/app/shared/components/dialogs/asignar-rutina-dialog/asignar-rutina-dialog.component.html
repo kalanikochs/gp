@@ -97,6 +97,12 @@
       <app-creacion-dieta (dietaToAdd)="obtenerDieta($event)"></app-creacion-dieta>
     </ng-container>
 
+    <ng-container *ngIf="data.plan_tipo==='2'">
+      <h4>Agregar un tipo de ejercicio a la rutina </h4>
+      <h5 class="color-accent">**Sólo para rutinas deportivas </h5>
+      <app-creacion-ejercicio (dietaToAdd)="obtenerDieta($event)"></app-creacion-ejercicio>
+    </ng-container>
+
 </mat-dialog-content>
 <mat-dialog-actions class="flex center-xs">
   <button mat-raised-button color="primary" cdkFocusInitial (click)="asignarRutina()">

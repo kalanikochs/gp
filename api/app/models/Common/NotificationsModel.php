@@ -43,29 +43,29 @@ class NotificationsModel
             'contents' => array(
                 "en" => $description
             ),
-            'send_afert' => $date. ' GMT-5'
+            'send_after' => $date . ' GMT-5'
         );
-
+        //date('Y-m-d H:i:s', strtotime($date).' GMT-5')
         $fields = json_encode($fields);
-
+        
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
-        curl_setopt($ch, CURLOPT_HTTPHEADER,
-            [
-                'Content-Type: application/json; charset=utf-8',
-                'Authorization: Basic MmMyYWQ2YzAtNWQ0My00NjdjLWJiOTEtOWMwY2VhN2IxM2Uz'
-            ]
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json; charset=utf-8',
+            'Authorization: Basic MmMyYWQ2YzAtNWQ0My00NjdjLWJiOTEtOWMwY2VhN2IxM2Uz'
+            )
         );
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($ch, CURLOPT_HEADER, FALSE);
         curl_setopt($ch, CURLOPT_POST, TRUE);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-
+        
         $response = curl_exec($ch);
         curl_close($ch);
 
-        return $fields;
+
+        return $response;
         /* if (!isset($_REQUEST['id'])) {
             return [];
         }

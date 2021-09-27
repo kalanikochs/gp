@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Agregar un Ejercicio</h1>
+<mat-dialog-content>
+  <form [formGroup]="agregarEjercicio">
+    <mat-form-field class="w-100">
+      <mat-label>Grupo Muscular</mat-label>
+      <input matInput formControlName="grupodeportivo" type="text" #grupodeportivo />
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Ejercicio</mat-label>
+      <input matInput formControlName="ejercicio" type="text" #ejercicio />
+    </mat-form-field>
+     
+  </form>
+  
+</mat-dialog-content>
+<mat-dialog-actions class="flex justify-content-end">
+<button mat-raised-button color="primary" (click)="_agregarEjercicio()"> Registrar Ejercicio</button>
+<button mat-raised-button color="accent" [mat-dialog-close]="{ reload: false }"> Cerrar</button>
+</mat-dialog-actions>

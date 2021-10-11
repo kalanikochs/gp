@@ -18,7 +18,9 @@
 
     <mat-form-field class="w-100">
       <mat-label>Indicaciones</mat-label>
-      <mat-select [formControl]="alimentosfc">
+      <mat-select [formControl]="alimentosfc"
+      (selectionChange)="seleccionarAlimento($event.value)"
+      >
         <mat-option
           *ngFor="let alimento of alimentosToShow"
           [value]="alimento.alimento_id"
@@ -32,19 +34,4 @@
       <button mat-raised-button color="accent" (click)="modificarAlimento()">Modificar Indicaciones</button>
     </div>
   </mat-card>
-</div>
-
-<div class="allCenter" *ngIf="gruposalimenticios.length == 0">
-  <form [formGroup]="asignarEjercicio" style="width:50%;">
-    <mat-card>
-      <h3>Configurar Switch Psicología</h3>
-      <mat-form-field class="w-100">
-        <mat-label>Grupo Psicologia</mat-label>
-        <input matInput formControlName="ejercicio" type="text" #ejercicio />
-      </mat-form-field>
-      <div class="w-100 flex justify-content-around">
-        <button mat-raised-button color="primary" (click)="agregarEjercicio()" style="color:#fff;">Agregar primera terapia</button>
-      </div>
-    </mat-card>
-  </form>
 </div>

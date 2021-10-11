@@ -25,6 +25,8 @@ export class ConfigurarSwitchPsicologiaComponent implements OnInit {
   alimentosfc: FormGroup;
   alimentosToShow: Array<Alimento> = [];
   asignarEjercicio: FormGroup;
+  $other: Array<any>;
+  $other2: Array<any>;
 
   constructor(
     private httpRequest: HttpRequestService,
@@ -104,12 +106,18 @@ export class ConfigurarSwitchPsicologiaComponent implements OnInit {
       alimento => alimento.grupoalimenticio_id === event
     );
     console.log(event)
+    this.$other = [{event}];
+  }
+
+  seleccionarAlimento(event: string) {
+    console.log(event);
+    this.$other2 = [{event}];
   }
 
   agregarAlimento() {
-    if (this.gruposalimenticiosfc.valid) {
+    if (this.$other) {
       const grupodeportivoselected = this.gruposalimenticios.find(
-        ga => ga.grupopsicologia_id == this.gruposalimenticiosfc.value
+        ga => ga.grupopsicologia_id == this.$other[0].event
       );
 
       console.log(this.gruposalimenticios[0].grupopsicologia_id)
@@ -135,9 +143,9 @@ export class ConfigurarSwitchPsicologiaComponent implements OnInit {
   }
 
   modificarAlimento() {
-    if (this.alimentosfc.valid) {
+    if (this.$other2) {
       const alimentoselected = this.alimentos.find(
-        al => al.alimento_id == this.alimentosfc.value
+        al => al.alimento_id == this.$other2[0].event
       );
 
       console.log(this.alimentos)

@@ -26,6 +26,17 @@ import { AgregarEjercicioDialogComponent } from './components/dialogs/agregar-ej
 import { ModificarAlimentoDialogComponent } from './components/dialogs/modificar-alimento-dialog/modificar-alimento-dialog.component';
 import { ModificarEjercicioDialogComponent } from './components/dialogs/modificar-ejercicio-dialog/modificar-ejercicio-dialog.component';
 import { MessagesComponent } from './components/messages/messages.component';
+import { ConfigurarSwitchPsicologiaComponent } from './components/switch-psicologia/configurar-switch-psicologia/configurar-switch-psicologia.component';
+import { SwitchPsicologiaLayoutComponent } from './components/switch-psicologia/switch-psicologia-layout/switch-psicologia-layout.component';
+import { AgregarPsicologiaDialogComponent } from './components/dialogs/agregar-psicologia-dialog/agregar-psicologia-dialog.component';
+import { ModificarPsicologiaDialogComponent } from './components/dialogs/modificar-psicologia-dialog/modificar-psicologia-dialog.component';
+import { ConfigurarGrupoPsicologiaComponent } from './components/switch-psicologia/configurar-grupo-psicologia/configurar-grupo-psicologia.component';
+import { SwitchMedicoLayoutComponent } from './components/switch-medico/switch-medico-layout/switch-medico-layout.component';
+import { ConfigurarSwitchMedicoComponent } from './components/switch-medico/configurar-switch-medico/configurar-switch-medico.component';
+import { ConfigurarGrupoMedicoComponent } from './components/switch-medico/configurar-grupo-medico/configurar-grupo-medico.component';
+import { AgregarMedicinaDialogComponent } from './components/dialogs/agregar-medicina-dialog/agregar-medicina-dialog.component';
+import { ModificarMedicinaDialogComponent } from './components/dialogs/modificar-medicina-dialog/modificar-medicina-dialog.component';
+
 @NgModule({
   declarations: [
     ProfsLayoutComponent,
@@ -44,10 +55,20 @@ import { MessagesComponent } from './components/messages/messages.component';
     ConfigurarSwitchDeportivoComponent,
     ConfigurarGrupoMuscularComponent,
     SwitchDeportivoLayoutComponent,
+    ConfigurarSwitchPsicologiaComponent,
+    ConfigurarGrupoPsicologiaComponent,
+    SwitchPsicologiaLayoutComponent,
+    ConfigurarSwitchMedicoComponent,
+    ConfigurarGrupoMedicoComponent,
+    SwitchMedicoLayoutComponent,
     AgregarAlimentoDialogComponent,
     AgregarEjercicioDialogComponent,
+    AgregarPsicologiaDialogComponent,
+    AgregarMedicinaDialogComponent,
     ModificarAlimentoDialogComponent,
     ModificarEjercicioDialogComponent,
+    ModificarPsicologiaDialogComponent,
+    ModificarMedicinaDialogComponent,
     MessagesComponent
   ],
   imports: [
@@ -64,8 +85,12 @@ import { MessagesComponent } from './components/messages/messages.component';
     ResultadoCitaDialogComponent,
     AgregarAlimentoDialogComponent,
     AgregarEjercicioDialogComponent,
+    AgregarPsicologiaDialogComponent,
+    AgregarMedicinaDialogComponent,
     ModificarAlimentoDialogComponent,
-    ModificarEjercicioDialogComponent
+    ModificarEjercicioDialogComponent,
+    ModificarPsicologiaDialogComponent,
+    ModificarMedicinaDialogComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

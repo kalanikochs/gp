@@ -8,6 +8,7 @@ import { HttpRequestService } from 'src/app/core/services/http-request.service';
 import { environment } from 'src/environments/environment';
 import { UserLogged } from 'src/app/core/interfaces/userLogged.module';
 import { SwitchAlimentario } from 'src/app/core/interfaces/switchAlimentario.module';
+import { Observaciones } from 'src/app/core/interfaces/observaciones.module';
 
 @Component({
   selector: 'app-ver-ejercicio',
@@ -32,6 +33,8 @@ export class VerEjercicioComponent implements OnInit {
   grupoalimenticio: Array<GrupoDeportivo> = [];
 
   alimentosToShow: Array<Alimento> = [];
+
+  observaciones: Array<Observaciones> = [];
 
   constructor(private httpRequest: HttpRequestService) {}
 
@@ -63,6 +66,7 @@ export class VerEjercicioComponent implements OnInit {
     await this.traerGruposAlimenticios();
     await this.traerAlimentos();
     await this.asignarDieta();
+    await this.traerObservaciones();
   }
 
   traerDias() {
@@ -166,6 +170,37 @@ export class VerEjercicioComponent implements OnInit {
     });
   }
 
+  traerObservaciones() {
+    return new Promise(resolve => {
+      const data = new FormData();
+      data.append('rutina_id', localStorage.getItem('plan_id'))
+
+      this.httpRequest
+        .postRequest(
+          `${environment.apiUrl}/shared/rutinas/mostrarRutina/`,
+          data
+        )
+        .pipe(
+          map(response => {
+            console.log(response)
+            if (response.status === 'success') {
+              const $dbResponse = JSON.parse(response.message[0].rutina_informacion);
+              this.observaciones = $dbResponse.dieta[0].jornadasalimenticias[0].observaciones[0].observaciones;
+              console.log(this.observaciones)
+              //console.log($dbResponse.dieta[0].jornadasalimenticias[0].observaciones[0].observaciones)
+            }/* else {
+              console.log(response.message);
+              return [];
+            }*/
+          })
+        )
+        .subscribe(result => {
+          //this.observaciones = result;
+          resolve(true);
+        });
+    });
+  }
+
   // ===============================
 
   cantidadDeAlimentosDia(dia: any) {
@@ -196,7 +231,7 @@ export class VerEjercicioComponent implements OnInit {
   }
 
   findJornada(jornada: any) {
-    return this.jornadaalimenticia.find(
+  return this.jornadaalimenticia.find(
       cettejornada =>
         cettejornada.jornadadeportiva_id ===
         jornada.jornadaalimenticia_id.toString()
@@ -211,13 +246,16 @@ export class VerEjercicioComponent implements OnInit {
     ).alimento_nombre;
   }
 
+  findObservacion(jornada: any) {
+    return this.observaciones;
+  }
+
   switchAlimentos(dia: any, jornadaalimenticia: any, alimento: any) {
     if (this.userLogin$.type.toString() == '2' && this.informacion.plan.plan_estado_id == '1') {
       const dia_id = dia.dia_id;
       const jornadaalimenticia_id = jornadaalimenticia.jornadaalimenticia_id;
       const alimento_id = alimento.alimento_id;
-
-      console.log(jornadaalimenticia_id)
+      const observaciones = jornadaalimenticia.observaciones
 
       const thisSwitch:SwitchAlimentario = {
         dia_id: dia_id.toString(),

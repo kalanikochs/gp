@@ -64,7 +64,7 @@
         </mat-form-field>
       </div>
     </div>
-  </form>
+
 
   <div *ngIf="links.length > 0">
     <h4 class="mb-10">Listado de links</h4>
@@ -77,7 +77,7 @@
   </div>
 
   <h4>Agregar links al Plan</h4>
-  <ng-contaier [formGroup]="linksForm">
+  <ng-container [formGroup]="linksForm">
     <div class="row">
       <div class="col-xs-6">
         <mat-form-field>
@@ -105,10 +105,91 @@
     <div class="row center-xs">
       <button mat-stroked-button color="primary" (click)="agregarLink()">Agregar link</button>
     </div>
-  </ng-contaier>
+  </ng-container>
+
+  <ng-container *ngIf="$userType == 5">
+    <h4>Agregar un tipo Terapia Psicológica</h4>
+    <h5 class="color-accent">**Sólo para grupo Psicología </h5>
+    <mat-form-field class="w-100">
+      <mat-label>Grupo Terapias</mat-label>
+      <mat-select
+        [formGroup]="gruposalimenticiosfc"
+        (selectionChange)="selecionarAlimentosGrupos($event.value)"
+      >
+        <mat-option
+          *ngFor="let obj of gruposalimenticios"
+          [value]="obj.grupopsicologia_id"
+          >{{ obj.grupopsicologia_nombre }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Indicaciones</mat-label>
+      <mat-select [formGroup]="alimentosfc">
+        <mat-option
+          *ngFor="let alimento of alimentosToShow"
+          [value]="alimento.alimento_id"
+          >{{ alimento.alimento_nombre }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Observaciones</mat-label>
+      <input
+      type="text"
+      matInput
+      formControlName="obs"
+      placeholder="Obs"
+      #obs
+      />
+    </mat-form-field>
+  </ng-container>
+
+  <ng-container *ngIf="$userType == 2">
+    <h4>Agregar Receta Médica</h4>
+    <h5 class="color-accent">**Sólo para grupo Médico </h5>
+    <mat-form-field class="w-100">
+      <mat-label>Grupo Recetas</mat-label>
+      <mat-select
+        [formGroup]="gruposalimenticiosfc"
+        (selectionChange)="selecionarAlimentosGrupos($event.value)"
+      >
+        <mat-option
+          *ngFor="let obj of gruposalimenticios"
+          [value]="obj.grupomedico_id"
+          >{{ obj.grupomedico_nombre }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Indicaciones</mat-label>
+      <mat-select [formGroup]="alimentosfc">
+        <mat-option
+          *ngFor="let alimento of alimentosToShow"
+          [value]="alimento.alimento_id"
+          >{{ alimento.alimento_nombre }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Observaciones</mat-label>
+      <input
+      type="text"
+      matInput
+      formControlName="obs"
+      placeholder="Obs"
+      #obs
+      />
+    </mat-form-field>
+  </ng-container>
+  </form>
 </mat-dialog-content>
 <mat-dialog-actions class="flex center-xs">
   <button mat-raised-button color="primary" cdkFocusInitial (click)="asignarPlan()">
     Asignar Plan
-  </button>  
+  </button>
 </mat-dialog-actions>

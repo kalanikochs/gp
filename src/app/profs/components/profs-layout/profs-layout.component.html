@@ -8,8 +8,12 @@
         <a mat-list-item routerLink="planes">Listado de planes {{tipoCitasPlanes}}</a>
         <a mat-list-item routerLink="switchalimentario" *ngIf="userLogin$ && userLogin$.type == '4'">Configurar Switch
           Alimentario</a>
-          <a mat-list-item routerLink="switchdeportivo" *ngIf="userLogin$ && userLogin$.type == '3'">Configurar Switch
-            Deportivo</a>
+        <a mat-list-item routerLink="switchdeportivo" *ngIf="userLogin$ && userLogin$.type == '3'">Configurar Switch
+          Deportivo</a>
+        <a mat-list-item routerLink="switchpsicologia" *ngIf="userLogin$ && userLogin$.type == '5'">Configurar Switch
+          Psicología</a>
+          <a mat-list-item routerLink="switchmedico" *ngIf="userLogin$ && userLogin$.type == '2'">Configurar Switch
+            Médico</a>
         <a *ngIf="(isHandset$ | async)" mat-list-item (click)="openProfile()">Perfil</a>
         <!-- <a *ngIf="(isHandset$ | async)" mat-list-item (click)="openNotifications()">Notificaciones <span class="ml-20" matBadge="{{notifications$.length}}" matBadgeColor="warn"></span></a> -->
         <a *ngIf="(isHandset$ | async)" mat-list-item (click)="logout()">Cerrar Sesión</a>

@@ -1,5 +1,5 @@
 <div class="table-dieta-container">
-  <table class="mat-table mat-elevation-z8 w-100" *ngIf="dieta.length > 0">
+  <table class="mat-table mat-elevation-z8 w-100 tabla-ejercicio" *ngIf="dieta.length > 0">
       <!-- dias de la semana -->
       <ng-container *ngFor="let dia of dieta; index as diaIndex">
         <!-- nombre del dia -->
@@ -19,7 +19,7 @@
           <!-- nombre de la jornada -->
 
           <tr>
-            <td [attr.rowspan]="jornada.alimentos.length + 2">
+            <td [attr.rowspan]="jornada.alimentos.length + 1">
               {{ findJornada(jornada) }}
             </td>
           </tr>
@@ -29,7 +29,17 @@
           >
             <tr>
               <td (click)="switchAlimentos(dia,jornada,alimento)" class="cursor-context-menu">
-                {{ findAlimento(alimento) }}           
+                {{ findAlimento(alimento) }}
+              </td>
+            </tr>
+          </ng-container>
+
+          <ng-container
+            *ngFor="let jornada of dia.jornadasalimenticias;"
+          >
+            <tr>
+              <td>
+                {{ findObservacion(jornada) }}
               </td>
             </tr>
           </ng-container>

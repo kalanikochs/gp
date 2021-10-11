@@ -83,6 +83,22 @@
   
 </ng-container>
 
+<ng-container *ngIf="data.plan.serialized !== ''">
+  <ng-container *ngIf="$userType == 5">
+    <h3>Detalles adicionales</h3>
+    <div [innerHTML]="getSerializedData(data.plan.serialized)"></div>
+    <ng-container )>
+    </ng-container>
+  </ng-container>
+
+  <ng-container *ngIf="$userType == 2">
+    <h3>Detalles adicionales</h3>
+    <div [innerHTML]="getSerializedDataM(data.plan.serialized)"></div>
+    <ng-container )>
+    </ng-container>
+  </ng-container>
+</ng-container>
+
 </mat-dialog-content>
 <mat-dialog-actions class="flex center-xs end-md">
   <button mat-raised-button color="accent" cdkFocusInitial mat-dialog-close>

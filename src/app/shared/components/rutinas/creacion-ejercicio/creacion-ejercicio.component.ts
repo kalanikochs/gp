@@ -32,6 +32,8 @@ export class CreacionEjercicioComponent implements OnInit {
 
   alimentosToShow: Array<Alimento> = [];
 
+  observaciones: Array<any> = [];
+
   @Output() dietaToAdd = new EventEmitter();
 
   constructor(
@@ -169,7 +171,8 @@ export class CreacionEjercicioComponent implements OnInit {
       dia: ['', [Validators.required]],
       jornadaalimenticia: ['', [Validators.required]],
       grupoalimenticio: ['', [Validators.required]],
-      alimento: ['', [Validators.required]]
+      alimento: ['', [Validators.required]],
+      observaciones: ['', [Validators.required]]
     });
   }
 
@@ -216,6 +219,10 @@ export class CreacionEjercicioComponent implements OnInit {
     ).alimento_nombre;
   }
 
+  getObs(observaciones) {
+    return 'abcde';
+  }
+
   ordenarDieta() {
     // se ordenan los dias
     this.dieta.sort((a, b) => {
@@ -246,7 +253,8 @@ export class CreacionEjercicioComponent implements OnInit {
       if (!diaToSearch) {
         this.dieta.push({
           dia_id: this.formDieta.value.dia,
-          jornadasalimenticias: []
+          jornadasalimenticias: [],
+          observaciones: []
         });
 
         diaToSearch = this.dieta.find(
@@ -264,13 +272,14 @@ export class CreacionEjercicioComponent implements OnInit {
           this.formDieta.value.jornadaalimenticia
       );
 
-      console.log(diaToSearch.jornadasalimenticias)
+      console.log(diaToSearch)
 
       // 2.1 si no existe agregarla
       if (!jornadaToSearch) {
         this.dieta[indexDia].jornadasalimenticias.push({
           jornadaalimenticia_id: this.formDieta.value.jornadaalimenticia,
-          alimentos: []
+          alimentos: [],
+          observaciones: []
         });
 
         jornadaToSearch = diaToSearch.jornadasalimenticias.find(
@@ -298,11 +307,40 @@ export class CreacionEjercicioComponent implements OnInit {
         });
       }
 
+      //this.dieta[indexDia]
+
+      this.dieta[indexDia].jornadasalimenticias[indexJornada].observaciones.push({
+        observaciones: this.formDieta.value.observaciones
+      });
+
       this.ordenarDieta();
       this.emitirDieta();
       setTimeout(() => {
         this.setToBottom();
       }, 200);
+
+
+      const data = new FormData();
+      const url = `${environment.apiUrl}/shared/rutinas/agregarObservacion/`;
+      data.append('jornadaalimenticia_id', this.formDieta.value.jornadaalimenticia);
+      data.append('observacion', this.formDieta.value.observaciones);
+
+      this.httpRequest
+        .postRequest(url, data)
+        .pipe(
+          map(response => {
+            console.log(response)
+            if(response.status == 'success') {
+              alert(response.message.message)
+              console.log(response)
+              //window.location.reload()
+            }
+          })
+        )
+        .subscribe(response => {
+          console.log(response)
+        });
+
     } else {
       alert('Por favor carga la información completamente');
     }
@@ -311,7 +349,7 @@ export class CreacionEjercicioComponent implements OnInit {
   emitirDieta() {
     //const dietaToExport = JSON.stringify(this.dieta);
     this.dietaToAdd.emit(this.dieta);
-    console.log(this.dieta)
+    //console.log('emitido:' + JSON.stringify(this.dieta))
   }
 
   selecionarAlimentosGrupos(event: string) {

@@ -97,6 +97,7 @@ export class ListadoPlanesComponent
       .pipe(
         map(response => {
           if (response.status === 'success') {
+            console.log(response.message)
             return response.message as Plan[];
           } else {
             console.log(response.message);

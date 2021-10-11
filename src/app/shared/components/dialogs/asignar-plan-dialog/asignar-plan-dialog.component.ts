@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { map } from 'rxjs/operators';
 import { Persona } from 'src/app/core/interfaces/persona.module';
@@ -8,6 +8,8 @@ import { environment } from 'src/environments/environment';
 import { GrupoAlimenticio } from 'src/app/core/interfaces/grupoAlimenticio.module';
 import { Alimento } from 'src/app/core/interfaces/alimento.module';
 import { UserloginService } from 'src/app/core/services/userlogin.service';
+import { GrupoPsicologia } from 'src/app/core/interfaces/grupoPsicologia.module';
+import { GrupoMedico } from 'src/app/core/interfaces/grupoMedico.module';
 
 @Component({
   selector: 'app-solicitar-citas-dialog',
@@ -19,10 +21,17 @@ export class AsignarPlanDialogComponent implements OnInit {
   links: any[] = [];
   linksForm: FormGroup;
   listadoUsuarios: Persona[];
-  grupoalimenticio: Array<GrupoAlimenticio> = [];
+  gruposalimenticios: Array<any> = [];
   alimentosToShow: Array<Alimento> = [];
   alimentos: Array<Alimento> = [];
   userLogin$;
+  $userType = localStorage.getItem('type_id');
+  gruposalimenticiosfc: FormControl;
+  alimentosfc: FormControl;
+  gruponame: any;
+  serialized: any[] | Blob;
+
+  //gruposalimenticios: Array<GrupoMedico> = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -32,9 +41,15 @@ export class AsignarPlanDialogComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.buildFormControls();
     this.initForm();
     this.traerUsuarios();
     this.init();
+  }
+
+  private buildFormControls() {
+    this.gruposalimenticiosfc = new FormControl('', [Validators.required]);
+    this.alimentosfc = new FormControl('', [Validators.required]);
   }
 
   async init() {
@@ -66,6 +81,7 @@ export class AsignarPlanDialogComponent implements OnInit {
       usuario: ['', [Validators.required]],
       descripcion: ['', [Validators.required]],
       meta: ['', [Validators.required]],
+      obs: [undefined],
       anexos: [undefined]
     });
 
@@ -97,24 +113,38 @@ export class AsignarPlanDialogComponent implements OnInit {
   traerGruposAlimenticios() {
     return new Promise(resolve => {
       const data = new FormData();
+      let url = `${environment.apiUrl}/shared/rutinas/mostrarGruposPsicologia/`;
+      if(localStorage.getItem('type_id') == '2') {
+        url = `${environment.apiUrl}/shared/rutinas/mostrarGrupoMedico/`;
+      }
 
       this.httpRequest
         .postRequest(
-          `${environment.apiUrl}/shared/rutinas/mostrarGruposDeportivos/`,
+          url,
           data
         )
         .pipe(
           map(response => {
-            if (response.status === 'success') {
+            //if (response.status === 'success') {
+              console.log(response)
+              if(localStorage.getItem('type_id') == '5') {
+              return response.message as GrupoPsicologia[];
+              }
+              if(localStorage.getItem('type_id') == '2') {
+                return response.message as GrupoMedico[];
+              }
+            /*} else {
+              //console.log(response.message);
               return response.message as GrupoAlimenticio[];
-            } else {
-              console.log(response.message);
-              return [];
-            }
+            }*/
           })
         )
         .subscribe(result => {
-          this.grupoalimenticio = result;
+          this.gruposalimenticios = result;
+          console.log(this.gruposalimenticios)
+          if(!this.gruposalimenticios) {
+            this.gruposalimenticios = []
+          }
           resolve(true);
         });
     });
@@ -124,9 +154,14 @@ export class AsignarPlanDialogComponent implements OnInit {
     return new Promise(resolve => {
       const data = new FormData();
 
+      let url = `${environment.apiUrl}/shared/rutinas/mostrarIndicaciones/`;
+      if(localStorage.getItem('type_id') == '2') {
+        url = `${environment.apiUrl}/shared/rutinas/mostrarIndicacionesM/`
+      }
+
       this.httpRequest
         .postRequest(
-          `${environment.apiUrl}/shared/rutinas/mostrarEjercicios/`,
+          url,
           data
         )
         .pipe(
@@ -148,12 +183,21 @@ export class AsignarPlanDialogComponent implements OnInit {
 
   selecionarAlimentosGrupos(event: string) {
     this.alimentosToShow = this.alimentos.filter(
-      alimento =>
-        alimento.grupoalimenticio_id === event &&
-        alimento.alimento_estado_id > '0'
+      alimento => alimento.grupoalimenticio_id === event
     );
 
-    console.log(this.alimentos)
+    if(localStorage.getItem('type_id') == '2') {
+      this.gruponame = this.gruposalimenticios.filter(
+        gp => gp.grupomedico_id == event
+      )
+    }
+
+    if(localStorage.getItem('type_id') == '5') {
+      this.gruponame = this.gruposalimenticios.filter(
+        gp => gp.grupopsicologia_id == event
+      )
+    }
+
   }
 
   agregarLink() {
@@ -177,12 +221,32 @@ export class AsignarPlanDialogComponent implements OnInit {
   asignarPlan() {
     console.log(this.asignarPlanForm.valid)
     if (this.asignarPlanForm.valid) {
+      console.log(this.gruponame)
       const data = new FormData();
+
+      let serialized = JSON.stringify({
+        grupoalimenticio_id: this.alimentosToShow[0].grupoalimenticio_id,
+        grupoalimenticio_nombre: this.gruponame[0].grupopsicologia_nombre,
+        alimento: this.alimentosToShow[0].alimento_nombre,
+        observaciones: this.asignarPlanForm.value.obs
+      });
+
+      if(localStorage.getItem('type_id') == '2') {
+        serialized = JSON.stringify({
+          grupoalimenticio_id: this.alimentosToShow[0].grupoalimenticio_id,
+          grupoalimenticio_nombre: this.gruponame[0].grupomedico_nombre,
+          alimento: this.alimentosToShow[0].alimento_nombre,
+          observaciones: this.asignarPlanForm.value.obs
+        });
+      }
+
 
       data.append('plan_nombre', this.asignarPlanForm.value.nombre);
       data.append('plan_usuario', this.asignarPlanForm.value.usuario);
       data.append('plan_descripcion', this.asignarPlanForm.value.descripcion);
       data.append('plan_meta', this.asignarPlanForm.value.meta);
+      data.append('serialized', serialized)
+
       data.append(
         'plan_links',
         this.links.length > 0 ? JSON.stringify(this.links) : ''

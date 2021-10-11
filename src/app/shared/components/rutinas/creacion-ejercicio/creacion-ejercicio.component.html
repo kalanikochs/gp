@@ -1,5 +1,5 @@
 
-  <table class="mat-table mat-elevation-z8 w-100" *ngIf="dieta.length > 0">
+  <table class="mat-table mat-elevation-z8 w-100 tabla-ejercicio" *ngIf="dieta.length > 0">
     <!-- dias de la semana -->
     <ng-container *ngFor="let dia of dieta; index as diaIndex">
       <!-- nombre del dia -->
@@ -19,7 +19,7 @@
         <!-- nombre de la jornada -->
 
         <tr>
-          <td [attr.rowspan]="jornada.alimentos.length + 2">
+          <td [attr.rowspan]="jornada.alimentos.length + 1">
             {{ findJornada(jornada) }}
           </td>
         </tr>
@@ -30,12 +30,16 @@
           <tr>
             <td>
               {{ findAlimento(alimento) }}
-              <mat-icon
-                style="float: right;"
-                class="cursor-context-menu"
-                (click)="borrarAlimento(diaIndex, jornadaIndex, alimentoIndex)"
-                >close</mat-icon
-              >
+            </td>
+          </tr>
+        </ng-container>
+
+        <ng-container
+          *ngFor="let obj of jornada.observaciones; index as observacion"
+        >
+          <tr>
+            <td>
+              {{ obj.observaciones }}
             </td>
           </tr>
         </ng-container>
@@ -108,6 +112,15 @@
               {{ alimento.alimento_nombre }}
             </mat-option>
           </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <mat-form-field class="w-100">
+          <mat-label>Observaciones</mat-label>
+          <input matInput formControlName="observaciones" type="text" #observaciones />
         </mat-form-field>
       </div>
     </div>

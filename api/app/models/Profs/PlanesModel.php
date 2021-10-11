@@ -116,7 +116,7 @@ class PlanesModel {
 
     function mostrarAnexos($planId){
 
-        $dir = './storage/planes/' . $planId . '/';
+        $dir = '.api/storage/planes/' . $planId . '/';
                                         
         if (file_exists($dir)) {
                         

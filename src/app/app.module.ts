@@ -11,8 +11,10 @@ import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { Camera } from '@ionic-native/camera/ngx';
 import { StatusBar} from '@ionic-native/status-bar/ngx';
-import { ServiceWorkerModule } from '@angular/service-worker';
+/* import { ServiceWorkerModule } from '@angular/service-worker'; */
 import { environment } from '../environments/environment';
+
+import { OneSignal } from '@ionic-native/onesignal/ngx';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -24,18 +26,19 @@ import { environment } from '../environments/environment';
     HttpClientModule,
     MaterialModule,
     IonicModule.forRoot(),
-    ServiceWorkerModule.register('ngsw-worker.js', {
+    /* ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
-    })
+    }) */
   ],
   providers: [
     StatusBar,
     Camera,
     Title,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    OneSignal,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],
   bootstrap: [AppComponent]
 })

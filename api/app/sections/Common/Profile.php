@@ -68,6 +68,13 @@ class Profile extends Controller{
        
         printJSON($response);
     }
+
+    function pushIdRegister(){
+         //Register Player id Onesignar
+         $dataAccess = $this->model->addPushID();
+         $response = ($dataAccess) ? successFailure(true) : successFailure(false);
+         printJSON($response);
+    }
     
 }
 

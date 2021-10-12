@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class PlanesViewDialogComponent implements OnInit {
   imgExtensions = environment.supportedImages;
+  $userType = localStorage.getItem('type_id');
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -30,5 +31,31 @@ export class PlanesViewDialogComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustResourceUrl(
       'https://www.youtube.com/embed/' + video
     );
+  }
+
+  getSerializedData(data) {
+    const dd = JSON.parse(data);
+    if(dd && dd.grupoalimenticio_nombre) {
+      return `
+      <p><b>Terapia:</b> ${dd.grupoalimenticio_nombre}</p>
+      <p><b>Indicaciones:</b> ${dd.alimento}</p>
+      <p><b>Observaciones:</b> ${dd.observaciones}</p>
+      `;
+    } else {
+      return '';
+    }
+  }
+
+  getSerializedDataM(data) {
+    const dd = JSON.parse(data);
+    if(dd && dd.grupoalimenticio_nombre) {
+      return `
+      <p><b>Receta:</b> ${dd.grupoalimenticio_nombre}</p>
+      <p><b>Indicaciones:</b> ${dd.alimento}</p>
+      <p><b>Observaciones:</b> ${dd.observaciones}</p>
+      `;
+    } else {
+      return '';
+    }
   }
 }

@@ -1,0 +1,53 @@
+<div class="table-dieta-container">
+  <table class="mat-table mat-elevation-z8 w-100 tabla-ejercicio" *ngIf="dieta.length > 0">
+      <!-- dias de la semana -->
+      <ng-container *ngFor="let dia of dieta; index as diaIndex">
+        <!-- nombre del dia -->
+        <tr>
+          <td
+            [attr.rowspan]="
+              2 * cantidadDeJornadasDia(dia) + cantidadDeAlimentosDia(dia)
+            "
+          >
+            {{ findDia(dia) }}
+          </td>
+        </tr>
+
+        <ng-container
+          *ngFor="let jornada of dia.jornadasalimenticias; index as jornadaIndex"
+        >
+          <!-- nombre de la jornada -->
+
+          <tr>
+            <td [attr.rowspan]="jornada.alimentos.length + 1">
+              {{ findJornada(jornada) }}
+            </td>
+          </tr>
+
+          <ng-container
+            *ngFor="let alimento of jornada.alimentos; index as alimentoIndex"
+          >
+            <tr>
+              <td (click)="switchAlimentos(dia,jornada,alimento)" class="cursor-context-menu">
+                {{ findAlimento(alimento) }}
+              </td>
+            </tr>
+          </ng-container>
+
+          <ng-container
+            *ngFor="let jornada of dia.jornadasalimenticias;"
+          >
+            <tr>
+              <td>
+                {{ findObservacion(jornada) }}
+              </td>
+            </tr>
+          </ng-container>
+
+          <mat-divider></mat-divider>
+        </ng-container>
+      </ng-container>
+  </table>
+</div>
+
+<div class="w-100 mb-20"></div>

@@ -1,0 +1,21 @@
+.mat-message {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    &.success {
+        .msg {
+            background: rgb(76 175 80 / 84%);
+            width: 50%;
+            text-align: center;
+            padding: 1%;
+            color: #fff;
+            border-radius: 5px;
+            border: 1px solid #3d8a40;
+            margin-top: 5%;
+        }
+    }
+}

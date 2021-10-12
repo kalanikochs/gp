@@ -8,11 +8,12 @@ import { map } from 'rxjs/operators';
 import { Persona } from 'src/app/core/interfaces/persona.module';
 import { HttpRequestService } from 'src/app/core/services/http-request.service';
 import { environment } from 'src/environments/environment';
-import {  ServiceWorkerModule, SwPush } from '@angular/service-worker';
+/* import {  ServiceWorkerModule, SwPush } from '@angular/service-worker'; */
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { OneSignalService } from 'src/app/services/one-signal.service';
 // import { MatSnackBarModule } from '@angular/material/snack-bar';
 // import {MDCSnackbar} from '@material/snackbar';
-import {MatSnackBar} from '@angular/material/snack-bar';
+/* import {MatSnackBar} from '@angular/material/snack-bar'; */
 
 @Component({
   selector: 'app-messages',
@@ -48,18 +49,19 @@ export class MessagesComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private httpRequest: HttpRequestService,
+    private os: OneSignalService
     // private swPush: SwPush,
     // private snackbar: MDCSnackbar,
-    private _snackBar: MatSnackBar,
+    /* private _snackBar: MatSnackBar, */
     // readonly swPush: SwPush)
     //public dialogRef: MatDialogRef<SolicitarCitasDialogComponent>,
     //@Inject(MAT_DIALOG_DATA) public data: any
   ) {
 
-   }
-    openSnackBar(title: string, description: string) {
-    this._snackBar.open(title, description);
   }
+  /* openSnackBar(title: string, description: string) {
+  this._snackBar.open(title, description);
+} */
 
 
   ngOnInit() {
@@ -99,7 +101,7 @@ export class MessagesComponent implements OnInit {
     });
   }
 
-   initForm() {
+  initForm() {
     this.asignarUserForm = this.formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
@@ -107,6 +109,37 @@ export class MessagesComponent implements OnInit {
       date: ['', Validators.required],
       //tipo: [ `${this.data.tipoProceso}` , Validators.required]
     });
+  }
+
+  sendMessage(){
+    console.log(this.asignarUserForm.value);
+    this.os.sendNotifications(this.asignarUserForm.value);
+
+    //if(this.asignarUserForm.valid) {
+      // const url = 'https://onesignal.com/api/v1/notifications'
+      // const data = {
+      //   app_id: "949d218f-1a5d-4f1b-9dd0-ea8999076061",
+      //   include_player_ids: [this.asignarUserForm.value.usuario],
+      //   data: {"foo": "bar"},
+      //   contents: {"en": this.asignarUserForm.value.description}
+      // }
+      // fetch(url, {
+      //   method: 'POST',
+      //   body: JSON.stringify(data),
+      //   headers: {
+      //     "Content-Type": "application/json; charset=utf-8",
+      //     "Authorization": "Basic NGEwMGZmMjItY2NkNy0xMWUzLTk5ZDUtMDAwYzI5NDBlNjJj"
+      //   }
+      // })
+      // .then(function(res) {
+      //   return res.json()
+      // })
+      // .then(function(data) {
+      //   console.log(data)
+      // })
+      // .catch(err => console.error(err))
+
+    //}
   }
 
   /*submitForm() {
@@ -140,7 +173,7 @@ export class MessagesComponent implements OnInit {
   //   }
 
 
-    // .catch(err => console.error('Could not subscribe to notification', err));
+  // .catch(err => console.error('Could not subscribe to notification', err));
 
 
 

@@ -14,4 +14,5 @@ export interface Plan {
   plan_anexos: any;
   plan_estado_id: string;
   plan_estado_nombre: string;
+  serialized: any;
 }

@@ -178,6 +178,7 @@ export class ListadoRutinasComponent
         
       }
     })
+    localStorage.setItem('plan_id', index);
   }
 
   asignarRutina() {

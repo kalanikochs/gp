@@ -7,7 +7,10 @@ import { PlanesLayoutComponent } from './components/planes/planes-layout/planes-
 import { ListadoRutinasComponent } from '../shared/components/rutinas/listado-rutinas/listado-rutinas.component';
 import { ListadoEvidenciasComponent } from '../shared/components/evidencias/listado-evidencias/listado-evidencias.component';
 import { SwitchAlimentarioLayoutComponent } from './components/switch-alimentario/switch-alimentario-layout/switch-alimentario-layout.component';
+import { SwitchDeportivoLayoutComponent } from './components/switch-deportivo/switch-deportivo-layout/switch-deportivo-layout.component';
 import { MessagesComponent } from './components/messages/messages.component';
+import { SwitchPsicologiaLayoutComponent } from './components/switch-psicologia/switch-psicologia-layout/switch-psicologia-layout.component';
+import { SwitchMedicoLayoutComponent } from './components/switch-medico/switch-medico-layout/switch-medico-layout.component';
 
 const routes: Routes = [
   {
@@ -42,6 +45,18 @@ const routes: Routes = [
       {
         path: 'switchalimentario',
         component: SwitchAlimentarioLayoutComponent
+      },
+      {
+        path: 'switchdeportivo',
+        component: SwitchDeportivoLayoutComponent
+      },
+      {
+        path: 'switchpsicologia',
+        component: SwitchPsicologiaLayoutComponent
+      },
+      {
+        path: 'switchmedico',
+        component: SwitchMedicoLayoutComponent
       },
       {
         path: 'messages',

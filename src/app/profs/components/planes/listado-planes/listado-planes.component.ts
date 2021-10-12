@@ -36,6 +36,7 @@ export class ListadoPlanesComponent
     );
   isHandsetValue: boolean;
   userLogged$: UserLogged;
+  $userType = localStorage.getItem('type_id');
 
   displayedColumns: string[] = [
     'fecha',
@@ -97,6 +98,7 @@ export class ListadoPlanesComponent
       .pipe(
         map(response => {
           if (response.status === 'success') {
+            console.log(response.message)
             return response.message as Plan[];
           } else {
             console.log(response.message);

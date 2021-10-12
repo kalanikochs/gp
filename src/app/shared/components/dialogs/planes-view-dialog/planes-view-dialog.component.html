@@ -61,26 +61,36 @@
  
   </ng-container>
 
-<ng-container *ngIf="data.plan.plan_links !== ''">
+  <ng-container *ngIf="data.plan.plan_links !== ''">
 
-    <ng-container *ngIf="data.plan.plan_links
-    | jsonParse
-    | thereAreLinks">
-      <h3>Links del plan</h3>
-      <mat-list role="list">
-        <ng-container *ngFor="let link of data.plan.plan_links | jsonParse">
-          <a
-            *ngIf="link | isLink"
-            mat-list-item
-            role="listitem"
-            href="{{ link.link }}"
-            target="_blank"
-            >{{ link.nombre }}</a
-          >
-        </ng-container>
-      </mat-list>
+      <ng-container *ngIf="data.plan.plan_links
+      | jsonParse
+      | thereAreLinks">
+        <h3>Links del plan</h3>
+
+        <mat-list role="list">
+          <ng-container *ngFor="let olink of data.plan.plan_links | jsonParse">
+            <a mat-list-item role="listitem" href="{{ olink.link }}" style="color:rgb(2 115 166);" target="_blank">{{ olink.nombre }}</a>
+          </ng-container>
+        </mat-list>
+      </ng-container>
+
+  </ng-container>
+
+<ng-container *ngIf="data.plan.serialized !== ''">
+  <ng-container *ngIf="$userType == 5 || $userType == 1 && data.plan.plan_tipo_nombre == 'plan de psicologia'">
+    <h3>Detalles adicionales</h3>
+    <div [innerHTML]="getSerializedData(data.plan.serialized)"></div>
+    <ng-container )>
     </ng-container>
-  
+  </ng-container>
+
+  <ng-container *ngIf="$userType == 2 || $userType == 1 && data.plan.plan_tipo_nombre == 'plan de medicina'">
+    <h3>Detalles adicionales</h3>
+    <div [innerHTML]="getSerializedDataM(data.plan.serialized)"></div>
+    <ng-container )>
+    </ng-container>
+  </ng-container>
 </ng-container>
 
 </mat-dialog-content>

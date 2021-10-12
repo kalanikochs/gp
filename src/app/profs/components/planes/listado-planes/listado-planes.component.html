@@ -70,14 +70,14 @@
 
               <mat-icon
                 class="cursor-context-menu"
-                *ngIf="element.plan_estado_id !== '2',else x"
+                *ngIf="element.plan_estado_id !== '2' && $userType !== '2' && $userType !== '5',else x"
                 [routerLink]="['./rutinas', element.plan_id]"
-                >last_page</mat-icon                
+                >last_page</mat-icon
               >
 
-              <ng-template #x>
+              <!-- <ng-template #x>
                 <mat-icon class="cursor-context-menu">not_interested</mat-icon>
-              </ng-template>
+              </ng-template> -->
             </div>
           </td>
         </ng-container>

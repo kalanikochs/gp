@@ -1,6 +1,6 @@
 <?php
 
-class FoodModel {
+class DeporteModel {
     private $db;
 
     function __construct()
@@ -8,30 +8,30 @@ class FoodModel {
         $this->db = new Database();
     }
 
-    function showFoods() {
-        $query = "SELECT * FROM switch_alimentario";
+    function showDeportes() {
+        $query = "SELECT * FROM switch_deportivo";
 
         $this->db->query($query);
 
         return $this->db->responseAll();
     }
     
-    function grupoAlimenticio() {
-        $query = "SELECT id, grupo AS name FROM switch_alimentario";
+    function grupoDeportivo() {
+        $query = "SELECT id, rutina AS name FROM switch_deportivo";
 
         $this->db->query($query);
 
         return $this->db->responseAll();
     }
     
-    function Alimentos() {
+    function Ejercicio() {
         //if(isset($_REQUEST['id'])) {
             $query = "SELECT
             id AS alimento_id,
             id AS grupoalimenticio_id,
-            alimento AS alimento_nombre,
-            created_at AS alimento_estado_id
-            FROM switch_alimentario";
+            ejercicio AS alimento_nombre,
+            status AS alimento_estado_id
+            FROM switch_deportivo";
             
     
             $this->db->query($query);
@@ -40,20 +40,20 @@ class FoodModel {
         //}
     }
 
-    function addFoods() {
-        if(isset($_REQUEST['grupo']) && isset($_REQUEST['alimento'])) {
-            $grupo = $_REQUEST['grupo'];
-            $alimento = $_REQUEST['alimento'];
+    function addDeportes() {
+        if(isset($_REQUEST['rutina']) && isset($_REQUEST['ejercicio'])) {
+            $rutina = $_REQUEST['rutina'];
+            $ejercicio = $_REQUEST['ejercicio'];
             $date = strtotime(date('Y-m-d'));
 
-            $query = "INSERT INTO switch_alimentario (grupo, alimento, created_at) VALUES ('$grupo', '$alimento', $date)";
+            $query = "INSERT INTO switch_deportivo (rutina, ejercicio, status, created_at) VALUES ('$rutina', '$ejercicio', '1', $date)";
 
             $this->db->query($query);
 
             $result = $this->db->rowCount();
 
             if($result > 0) {
-                return 'Alimento añadido correctamente';
+                return 'Grupo Deportivo a単adido correctamente';
             } else {
                 return false;
             }

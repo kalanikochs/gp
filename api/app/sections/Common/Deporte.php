@@ -1,12 +1,12 @@
 <?php
 
-class Food extends Controller {
+class Deporte extends Controller {
 
     private $model;
 
     function __construct($action) {
         session_start();
-        $this->model = $this->assignModel('Common','FoodModel');
+        $this->model = $this->assignModel('Common','DeporteModel');
         if (is_callable(array($this,$action))) {
             $this->$action();
         } else {
@@ -15,9 +15,9 @@ class Food extends Controller {
         }
     }
 
-    function showFoods() {
+    function showDeportes() {
         textHeaders();
-        $foods = ['food'=> $this->model->showFoods()] ;
+        $foods = ['message'=> $this->model->showDeportes()] ;
 
         $success = successFailure(true);
         $response = array_merge($success,$foods);
@@ -25,9 +25,9 @@ class Food extends Controller {
         printJSON($response);
     }
 
-    function addFoods() {
+    function addDeportes() {
         textHeaders();
-       $foods = ['food'=> $this->model->addFoods()] ;
+       $foods = ['message'=> $this->model->addDeportes()] ;
 
        $success = successFailure(true);
        $response = array_merge($success,$foods);
@@ -36,9 +36,9 @@ class Food extends Controller {
 
     }
     
-    function grupoAlimenticio() {
+    function grupoDeportivo() {
        textHeaders();
-       $foods = ['message'=> $this->model->grupoAlimenticio()] ;
+       $foods = ['message'=> $this->model->grupoDeportivo()] ;
 
        $success = successFailure(true);
        $response = array_merge($success,$foods);
@@ -47,9 +47,9 @@ class Food extends Controller {
 
     }
     
-    function Alimentos() {
+    function Ejercicio() {
        textHeaders();
-       $foods = ['message'=> $this->model->Alimentos()] ;
+       $foods = ['message'=> $this->model->Ejercicio()] ;
 
        $success = successFailure(true);
        $response = array_merge($success,$foods);

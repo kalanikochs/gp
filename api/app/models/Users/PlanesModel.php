@@ -28,7 +28,8 @@ class PlanesModel {
         p.plan_meta,
         p.plan_links,
         p.estado_plan_id as plan_estado_id,
-        ep.estado_plan_desc as plan_estado_nombre
+        ep.estado_plan_desc as plan_estado_nombre,
+        serialized
         from plan p
         join persona pe on p.plan_usuario = pe.persona_id
         join (select persona_id, persona_nombres, persona_apellidos from persona) as up

@@ -36,6 +36,7 @@ export class ListadoPlanesComponent
     );
   isHandsetValue: boolean;
   userLogged$: UserLogged;
+  $userType = localStorage.getItem('type_id');
 
   displayedColumns: string[] = [
     'fecha',

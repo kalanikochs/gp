@@ -31,6 +31,22 @@ class Rutinas extends Controller{
         printJSON($response);
     }
 
+    function mostrarRutina(){
+
+        $rutinas = $this->model->mostrarRutina();
+        $response;       
+
+        if ($rutinas) {
+            $response = successFailure(true);
+            $rutinas = message($rutinas);
+            $response = array_merge($response, $rutinas);
+        }else{
+            $response = successFailure(false);
+        }
+
+        printJSON($response);
+    }
+
     function agregarRutina(){
 
         $solicitudRutina = $this->model->agregarRutina();
@@ -90,10 +106,197 @@ class Rutinas extends Controller{
         printJSON($response);
 
     }
+    
+    function mostrarGruposDeportivos(){
+
+        $gruposAlimenticios = $this->model->mostrarGruposDeportivos();
+        $response;       
+
+        if ($gruposAlimenticios) {
+            $response = successFailure(true);
+            $gruposAlimenticios = message($gruposAlimenticios);
+            $response = array_merge($response, $gruposAlimenticios);
+        }else{
+            $response = successFailure(false);
+        }
+
+        printJSON($response);
+
+    }
+
+    function mostrarGruposPsicologia(){
+
+        $gruposAlimenticios = $this->model->mostrarGruposPsicologia();
+        $response;       
+
+        if ($gruposAlimenticios) {
+            $response = successFailure(true);
+            $gruposAlimenticios = message($gruposAlimenticios);
+            $response = array_merge($response, $gruposAlimenticios);
+        }else{
+            $response = successFailure(false);
+        }
+
+        printJSON($response);
+
+    }
+
+    function mostrarGrupoMedico(){
+
+        $gruposAlimenticios = $this->model->mostrarGrupoMedico();
+        $response;       
+
+        if ($gruposAlimenticios) {
+            $response = successFailure(true);
+            $gruposAlimenticios = message($gruposAlimenticios);
+            $response = array_merge($response, $gruposAlimenticios);
+        }else{
+            $response = successFailure(false);
+        }
+
+        printJSON($response);
+
+    }
+    
+    function agregarEjercicio() {
+
+        $gruposAlimenticios = $this->model->agregarEjercicio();
+        $response;       
+
+        if ($gruposAlimenticios) {
+            $response = successFailure(true);
+            $gruposAlimenticios = message($gruposAlimenticios);
+            $response = array_merge($response, $gruposAlimenticios);
+        }else{
+            $response = successFailure(false);
+        }
+
+        printJSON($response);
+
+    }
+
+    function agregarTerapia() {
+
+        $gruposAlimenticios = $this->model->agregarTerapia();
+        $response;       
+
+        if ($gruposAlimenticios) {
+            $response = successFailure(true);
+            $gruposAlimenticios = message($gruposAlimenticios);
+            $response = array_merge($response, $gruposAlimenticios);
+        }else{
+            $response = successFailure(false);
+        }
+
+        printJSON($response);
+
+    }
+
+    function agregarReceta() {
+
+        $gruposAlimenticios = $this->model->agregarReceta();
+        $response;       
+
+        if ($gruposAlimenticios) {
+            $response = successFailure(true);
+            $gruposAlimenticios = message($gruposAlimenticios);
+            $response = array_merge($response, $gruposAlimenticios);
+        }else{
+            $response = successFailure(false);
+        }
+
+        printJSON($response);
+
+    }
+
+    function agregarObservacion(){
+
+        $gruposAlimenticios = $this->model->agregarObservacion();
+        $response;       
+
+        if ($gruposAlimenticios) {
+            $response = successFailure(true);
+            $gruposAlimenticios = message($gruposAlimenticios);
+            $response = array_merge($response, $gruposAlimenticios);
+        }else{
+            $response = successFailure(false);
+        }
+
+        printJSON($response);
+
+    }
 
     function mostrarAlimentos(){
 
         $alimentos = $this->model->mostrarAlimentos();
+        $response;       
+
+        if ($alimentos) {
+            $response = successFailure(true);
+            $alimentos = message($alimentos);
+            $response = array_merge($response, $alimentos);
+        }else{
+            $response = successFailure(false);
+        }
+
+        printJSON($response);
+
+    }
+
+    function mostrarObservaciones(){
+
+        $alimentos = $this->model->mostrarObservaciones();
+        $response;       
+
+        if ($alimentos) {
+            $response = successFailure(true);
+            $alimentos = message($alimentos);
+            $response = array_merge($response, $alimentos);
+        }else{
+            $response = successFailure(false);
+        }
+
+        printJSON($response);
+
+    }
+    
+    function mostrarEjercicios() {
+
+        $alimentos = $this->model->mostrarEjercicios();
+        $response;       
+
+        if ($alimentos) {
+            $response = successFailure(true);
+            $alimentos = message($alimentos);
+            $response = array_merge($response, $alimentos);
+        }else{
+            $response = successFailure(false);
+        }
+
+        printJSON($response);
+
+    }
+
+    function mostrarIndicaciones() {
+
+        $alimentos = $this->model->mostrarIndicaciones();
+        $response;       
+
+        if ($alimentos) {
+            $response = successFailure(true);
+            $alimentos = message($alimentos);
+            $response = array_merge($response, $alimentos);
+        }else{
+            $response = successFailure(false);
+        }
+
+        printJSON($response);
+
+    }
+
+    function mostrarIndicacionesM() {
+
+        $alimentos = $this->model->mostrarIndicacionesM();
         $response;       
 
         if ($alimentos) {
@@ -139,6 +342,23 @@ class Rutinas extends Controller{
         printJSON($response);
 
     }
+    
+    function mostrarJornadasDeportivas(){
+
+        $jornadasAlimenticias = $this->model->mostrarJornadasDeportivas();
+        $response;       
+
+        if ($jornadasAlimenticias) {
+            $response = successFailure(true);
+            $jornadasAlimenticias = message($jornadasAlimenticias);
+            $response = array_merge($response, $jornadasAlimenticias);
+        }else{
+            $response = successFailure(false);
+        }
+
+        printJSON($response);
+
+    }
 
     function agregarAlimento(){
         textHeaders();
@@ -148,9 +368,54 @@ class Rutinas extends Controller{
         printJSON($agregarAlimento);
 
     }
+    
+    function agregarRutinaEjercicio(){
+        textHeaders();
+
+        $agregarEjercicio = $this->model->agregarRutinaEjercicio();
+        
+        printJSON($agregarEjercicio);
+
+    }
+
+    function agregarIndicacion(){
+        textHeaders();
+
+        $agregarAlimento = $this->model->agregarIndicacion();
+        
+        printJSON($agregarAlimento);
+
+    }
+
+    function agregarIndicacionM(){
+        textHeaders();
+
+        $agregarAlimento = $this->model->agregarIndicacionM();
+        
+        printJSON($agregarAlimento);
+
+    }
 
     function modificarAlimento(){
         $modificarAlimento = $this->model->modificarAlimento();
+        
+        printJSON($modificarAlimento);
+    }
+    
+    function modificarEjercicio(){
+        $modificarAlimento = $this->model->modificarEjercicio();
+        
+        printJSON($modificarAlimento);
+    }
+
+    function modificarIndicaciones(){
+        $modificarAlimento = $this->model->modificarIndicaciones();
+        
+        printJSON($modificarAlimento);
+    }
+
+    function modificarIndicacionesM(){
+        $modificarAlimento = $this->model->modificarIndicacionesM();
         
         printJSON($modificarAlimento);
     }

@@ -49,6 +49,14 @@ class RutinasModel {
         }
     }
 
+    function mostrarRutina() {
+        $rutina = $_REQUEST['rutina_id'];
+        $query = "SELECT rutina_informacion FROM rutina WHERE rutina_id = '$rutina'";
+        $this->db->query($query);
+        return ($this->db->responseAll() ?: false);
+
+    }
+
     function agregarRutina(){
 
         $rutinaId = (int)$this->obtenerUltimaRutina() + 1;        
@@ -268,14 +276,179 @@ class RutinasModel {
         return $response;
 
     }
+    
+    function mostrarGruposDeportivos(){
 
-    function mostrarAlimentos(){
+        $query = "select * from grupodeportivo";
+        $this->db->query($query);
+        $response = $this->db->responseAll();
+
+        return $response;
+
+    }
+
+    function mostrarGruposPsicologia(){
+
+        $query = "select * from grupopsicologia";
+        $this->db->query($query);
+        $response = $this->db->responseAll();
+
+        return $response;
+
+    }
+
+    function mostrarGrupoMedico(){
+
+        $query = "select * from grupomedico";
+        $this->db->query($query);
+        $response = $this->db->responseAll();
+
+        return $response;
+
+    }
+    
+    function agregarEjercicio(){
+
+        $ejercicio = $_REQUEST['ejercicio'];
+        
+        $query = "INSERT INTO grupodeportivo (grupodeportivo_nombre) VALUES ('$ejercicio')";
+
+        $this->db->query($query);         
+        $result = $this->db->rowCount();
+
+        if ($result > 0) {                                  
+            return array('status' => 'success', 'message'=>'Datos ingresados con exito');            
+        }else{
+            return array('status' => 'failure', 'message'=>'Problema con la base de datos');
+        }
+
+    }
+
+    function agregarTerapia() {
+        $terapia = $_REQUEST['terapia'];
+        
+        $query = "INSERT INTO grupopsicologia (grupopsicologia_nombre) VALUES ('$terapia')";
+
+        $this->db->query($query);         
+        $result = $this->db->rowCount();
+
+        if($result > 0) {                                  
+            return array('status' => 'success', 'message'=>'Datos ingresados con exito');            
+        } else {
+            return array('status' => 'failure', 'message'=>'Problema con la base de datos');
+        }
+    }
+
+    function agregarReceta() {
+        $receta = $_REQUEST['receta'];
+        
+        $query = "INSERT INTO grupomedico (grupomedico_nombre) VALUES ('$receta')";
+
+        $this->db->query($query);
+        $result = $this->db->rowCount();
+
+        if($result > 0) {                                  
+            return array('status' => 'success', 'message'=>'Datos ingresados con exito');            
+        } else {
+            return array('status' => 'failure', 'message'=>'Problema con la base de datos');
+        }
+    }
+
+
+    function agregarObservacion(){
+
+        $observacion = $_REQUEST['observacion'];
+        $jornadaalimenticia = $_REQUEST['jornadaalimenticia_id'];
+        
+        $query = "INSERT INTO observaciones_deportivas (jornadadeportiva_id,observacion)
+        VALUES ('$jornadaalimenticia','$observacion')";
+
+        $this->db->query($query);         
+        $result = $this->db->rowCount();
+
+        if ($result > 0) {                                  
+            return array('status' => 'success', 'message'=>'Datos ingresados con exito');            
+        }else{
+            return array('status' => 'failure', 'message'=>'Problema con la base de datos');
+        }
+
+    }
+
+    function mostrarObservaciones() {
+        $query = "SELECT * FROM observaciones_deportivas";
+        $this->db->query($query);
+        
+        return ($this->db->responseAll() ?: false);
+    }
+    
+    function agregarRutinaEjercicio() {
+
+        $grupodeportivo_id = $_REQUEST['grupodeportivo_id'];
+        $ejercicio_nombre = $_REQUEST['ejercicio_nombre'];
+        
+        $query = "INSERT INTO ejercicio (grupodeportivo_id,ejercicio_nombre,estado_ejercicio_id) 
+                  VALUES ($grupodeportivo_id,'$ejercicio_nombre','1')";
+
+        $this->db->query($query);
+        $result = $this->db->rowCount();
+
+        if ($result > 0) {                                  
+            return array('status' => 'success', 'message'=>'Datos ingresados con exito');            
+        }else{
+            return array('status' => 'failure', 'message'=>'Problema con la base de datos');
+        }
+
+    }
+
+    function mostrarAlimentos() {
 
         $query = "select alimento_id,
                     grupoalimenticio_id,
                     alimento_nombre,
                     estado_alimento_id as alimento_estado_id
                     from alimento";
+        $this->db->query($query);
+        $response = $this->db->responseAll();
+
+        return $response;
+
+    }
+    
+    function mostrarEjercicios(){
+
+        $query = "select ejercicio_id as alimento_id,
+                    grupodeportivo_id as grupoalimenticio_id,
+                    ejercicio_nombre as alimento_nombre,
+                    estado_ejercicio_id as alimento_estado_id
+                    from ejercicio";
+        $this->db->query($query);
+        $response = $this->db->responseAll();
+
+        return $response;
+
+    }
+
+    function mostrarIndicaciones(){
+
+        $query = "select indicacion_id as alimento_id,
+                    grupopsicologia_id as grupoalimenticio_id,
+                    indicacion_nombre as alimento_nombre,
+                    estado_indicacion_id as alimento_estado_id
+                    from indicaciones";
+        $this->db->query($query);
+        $response = $this->db->responseAll();
+
+        return $response;
+
+    }
+
+    function mostrarIndicacionesM(){
+
+        $query = "select indicacion_id as alimento_id,
+                    grupomedico_id as grupoalimenticio_id,
+                    indicacion_nombre as alimento_nombre,
+                    estado_indicacion_id as alimento_estado_id
+                    from indicacionesm";
         $this->db->query($query);
         $response = $this->db->responseAll();
 
@@ -301,6 +474,16 @@ class RutinasModel {
         return $response;
 
     }
+    
+    function mostrarJornadasDeportivas(){
+
+        $query = "select * from jornadadeportiva";
+        $this->db->query($query);
+        $response = $this->db->responseAll();
+
+        return $response;
+
+    }
 
     function agregarAlimento(){
 
@@ -309,6 +492,44 @@ class RutinasModel {
         
         $query = "INSERT INTO alimento (grupoalimenticio_id,alimento_nombre) 
                   VALUES ($grupoalimenticio_id,'$alimento_nombre')";
+
+        $this->db->query($query);         
+        $result = $this->db->rowCount();
+
+        if ($result > 0) {                                  
+            return array('status' => 'success', 'message'=>'Datos ingresados con exito');            
+        }else{
+            return array('status' => 'failure', 'message'=>'Problema con la base de datos');
+        }
+
+    }
+
+    function agregarIndicacion(){
+
+        $grupoalimenticio_id = $_REQUEST['grupopsicologia_id'];
+        $alimento_nombre = $_REQUEST['indicacion_nombre'];
+        
+        $query = "INSERT INTO indicaciones (grupopsicologia_id,indicacion_nombre,estado_indicacion_id) 
+                  VALUES ($grupoalimenticio_id,'$alimento_nombre', '1')";
+
+        $this->db->query($query);         
+        $result = $this->db->rowCount();
+
+        if ($result > 0) {                                  
+            return array('status' => 'success', 'message'=>'Datos ingresados con exito');            
+        }else{
+            return array('status' => 'failure', 'message'=>'Problema con la base de datos');
+        }
+
+    }
+
+    function agregarIndicacionM(){
+
+        $grupoalimenticio_id = $_REQUEST['grupomedico_id'];
+        $alimento_nombre = $_REQUEST['indicacion_nombre'];
+        
+        $query = "INSERT INTO indicacionesm (grupomedico_id,indicacion_nombre,estado_indicacion_id) 
+                  VALUES ($grupoalimenticio_id,'$alimento_nombre', '1')";
 
         $this->db->query($query);         
         $result = $this->db->rowCount();
@@ -338,6 +559,66 @@ class RutinasModel {
         return array('status' => 'success', 'message'=>'Datos modificados con exito');            
         }else{
         return array('status' => 'failure', 'message'=>'Problema con la modificacion de alimentos');
+        }
+    }
+    
+    function modificarEjercicio(){
+        $alimento_id = $_REQUEST['ejercicio_id'];
+        $alimento_nombre = $_REQUEST['ejercicio_nombre'];
+        $alimento_estado = $_REQUEST['ejercicio_estado'];
+
+        $query = "UPDATE ejercicio SET 
+                    ejercicio_nombre = '$alimento_nombre',
+                    estado_ejercicio_id = $alimento_estado
+                  WHERE ejercicio_id = $alimento_id";
+
+        $this->db->query($query);         
+        $result = $this->db->rowCount();
+
+        if ($result > 0) {                                  
+        return array('status' => 'success', 'message'=>'Datos modificados con exito');            
+        }else{
+        return array('status' => 'failure', 'message'=>'Problema con la modificacion de alimentos');
+        }
+    }
+
+    function modificarIndicaciones() {
+        $indicacion_id = $_REQUEST['indicacion_id'];
+        $indicacion_nombre = $_REQUEST['indicacion_nombre'];
+        $indicacion_estado = $_REQUEST['indicacion_estado'];
+
+        $query = "UPDATE indicaciones SET 
+                    indicacion_nombre = '$indicacion_nombre',
+                estado_indicacion_id = '$indicacion_estado'
+                  WHERE indicacion_id = '$indicacion_id'";
+
+        $this->db->query($query);         
+        $result = $this->db->rowCount();
+
+        if ($result > 0) {                                  
+            return array('status' => 'success', 'message'=>'Datos modificados con exito');            
+        } else {
+            return array('status' => 'failure', 'message'=>'Problema con la modificacion de alimentos');
+        }
+    }
+
+    function modificarIndicacionesM() {
+        $indicacion_id = $_REQUEST['indicacion_id'];
+        $indicacion_nombre = $_REQUEST['indicacion_nombre'];
+        $indicacion_estado = $_REQUEST['indicacion_estado'];
+
+        $query = "UPDATE indicacionesm SET 
+                    indicacion_nombre = '$indicacion_nombre',
+                estado_indicacion_id = '$indicacion_estado'
+                  WHERE indicacion_id = '$indicacion_id'";
+
+        $this->db->query($query);         
+        $result = $this->db->rowCount();
+
+        if ($result > 0) {                                  
+            return array('status' => 'success', 'message'=>'Datos modificados con exito');            
+        } else {
+            return array('status' => 'failure', 'message'=>'Problema con la modificacion de alimentos');
         }
     }
 }

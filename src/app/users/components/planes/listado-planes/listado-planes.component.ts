@@ -41,6 +41,7 @@ export class ListadoPlanesComponent
   listadoPlanes: Plan[] = [];
   tipoProceso$: number;
   small: boolean;
+  $userType = localStorage.getItem('type_id');
 
   constructor(
     private dialog: MatDialog,
@@ -98,6 +99,7 @@ export class ListadoPlanesComponent
       .pipe(
         map(response => {
           if (response.status === 'success') {
+            console.log(response.message)
             return response.message as Plan[];
           } else {
             console.log(response.message);

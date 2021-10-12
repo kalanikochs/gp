@@ -1,0 +1,14 @@
+<div class="allCenter">
+  <form [formGroup]="asignarEjercicio" style="width:50%;">
+    <mat-card>
+      <h3>Crear nueva terapia</h3>
+      <mat-form-field class="w-100">
+        <mat-label>Grupo Terapia</mat-label>
+        <input matInput formControlName="ejercicio" type="text" #ejercicio />
+      </mat-form-field>
+      <div class="w-100 flex justify-content-around">
+        <button mat-raised-button color="primary" (click)="agregarEjercicio()" style="color:#fff;">Agregar terapia</button>
+      </div>
+    </mat-card>
+  </form>
+</div>

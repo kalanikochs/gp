@@ -1,0 +1,62 @@
+<div class="border-box mt-20" style="margin-bottom: 20%;">
+<div class="container w-80">
+  <h1>Envia mensajes a usuarios</h1>
+  <form [formGroup]="asignarUserForm" enctype="multipart/form-data" *ngIf="listadoUsuarios">
+    <div class="row">
+      <div class="col-xs-12 col-md-6 mt-20 mb-20">
+        <mat-form-field class="w-100">
+        <mat-label>Titulo</mat-label>
+          <input matInput formControlName="title" type="text" #title />
+        </mat-form-field>
+      </div>
+      <div class="col-xs-12 col-md-6 mt-20 mb-20">
+        <mat-form-field class="w-100">
+          <mat-label>Usuario</mat-label>
+          <mat-select formControlName="usuario" multiple>
+            <mat-option *ngFor="let usuario of listadoUsuarios" [value]="usuario.push_id">
+              {{usuario.persona_nombres}} {{usuario.persona_apellidos}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-xs-12 col-md-6 mt-20 mb-20">
+        <mat-form-field class="w-100">
+          <mat-label>Descripción</mat-label>
+          <textarea
+            matInput
+            formControlName="description"
+            cols="4"
+            type=""
+            #description
+          ></textarea>
+        </mat-form-field>
+      </div>
+      <div class="col-xs-12 col-md-6 mt-20 mb-20">
+        <mat-form-field class="w-100">
+          <mat-label>Fecha</mat-label>
+          <input matInput formControlName="date" type="datetime-local" #date />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <!-- <button (click)="subcribeToNotifications()" mat-raised-button color="primary">
+        Enviar
+      </button> -->
+      <button mat-stroked-button (click)="sendMessage()">Enviar</button>
+
+    </div>
+  </form>
+        <!-- <mat-form-field appearance="fill">
+          <mat-label>Message</mat-label>
+          <input matInput value="Disco party!" #message>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Action</mat-label>
+          <input matInput value="Dance" #action>
+        </mat-form-field> -->
+
+        <!-- <button mat-stroked-button (click)="openSnackBar(message.value, action.value)">Show snack-bar</button> -->
+
+</div>
+</div>

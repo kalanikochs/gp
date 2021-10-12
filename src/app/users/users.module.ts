@@ -20,6 +20,8 @@ import { ListadoPlanesComponent } from './components/planes/listado-planes/lista
 import { SolicitarCitasDialogComponent } from './components/dialogs/solicitar-citas-dialog/solicitar-citas-dialog.component';
 import { MedicinaHomeComponent } from './components/medicina/medicina-home/medicina-home.component';
 import { MedicinaLayoutComponent } from './components/medicina/medicina-layout/medicina-layout.component';
+import { MessagesComponent } from '../shared/components/messages/messages.component';
+import { OneSignal } from '@ionic-native/onesignal/ngx';
 @NgModule({
   declarations: [
     UsersHomeComponent,
@@ -35,7 +37,8 @@ import { MedicinaLayoutComponent } from './components/medicina/medicina-layout/m
     ListadoPlanesComponent,
     SolicitarCitasDialogComponent,
     MedicinaHomeComponent,
-    MedicinaLayoutComponent
+    MedicinaLayoutComponent,
+    MessagesComponent
   ],
   imports: [
     CommonModule,
@@ -45,6 +48,9 @@ import { MedicinaLayoutComponent } from './components/medicina/medicina-layout/m
     MaterialFileInputModule,
     SharedModule,
     CoreModule
+  ],
+  providers: [
+    OneSignal
   ],
   entryComponents: [CitasOptionsDialogComponent, SolicitarCitasDialogComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

@@ -78,6 +78,8 @@ export class UserloginService {
               contrasena: result.message.persona_contrasena
             };
             this.userLogged.next(userLoggedToAsign);
+            localStorage.setItem('type_id', result.message.tipo_persona_id);
+            console.log(userLoggedToAsign)
             resolve(true);
           } else {
             resolve(false);
@@ -120,6 +122,7 @@ export class UserloginService {
         .pipe(map((response: any) => response as LoginModule))
         .subscribe(result => {
           if (result.status === 'success') {
+            console.log(result)
             this.assignSession(result.id);
             resolve(true);
           } else {
@@ -131,15 +134,17 @@ export class UserloginService {
 
   assignSession(id) {
     sessionStorage.setItem('gsId', id);
+    sessionStorage.setItem('type_id', this.userLogged.value.type.toString())
   }
 
   logout() {
     sessionStorage.clear();
+    localStorage.removeItem('type_id');
   }
 
   userType() {
     let response;
-
+    localStorage.setItem('type_user', this.userLogged.value.type.toString())
     switch (this.userLogged.value.type.toString()) {
       case '1':
         response = 'users';

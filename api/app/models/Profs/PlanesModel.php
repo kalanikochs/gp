@@ -26,7 +26,8 @@ class PlanesModel {
         p.plan_meta,
         p.plan_links,
         p.estado_plan_id as plan_estado_id,
-        ep.estado_plan_desc as plan_estado_nombre
+        ep.estado_plan_desc as plan_estado_nombre,
+        serialized
         from plan p
         join persona pe on p.plan_usuario = pe.persona_id
         join (select persona_id, persona_nombres, persona_apellidos from persona) as up
@@ -78,12 +79,13 @@ class PlanesModel {
         $plan_descripcion = $_REQUEST['plan_descripcion'];
         $plan_meta = $_REQUEST['plan_meta'];
         $plan_links = $_REQUEST['plan_links'];
+        $array = json_encode($_REQUEST['serialized']);
 
         $query= "
         
         INSERT INTO plan
         (plan_tipo, plan_usuario, plan_profesional, plan_fecha,plan_nombre, plan_descripcion, plan_meta,
-        plan_links, estado_plan_id)
+        plan_links, estado_plan_id, serialized)
         VALUES
         ($plan_tipo,
         $plan_usuario,
@@ -92,7 +94,7 @@ class PlanesModel {
         '".$plan_nombre."',
         '".$plan_descripcion."',
         '".$plan_meta."',
-        '".$plan_links."',1)
+        '".$plan_links."',1,$array)
 
         ";
        

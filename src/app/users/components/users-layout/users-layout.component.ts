@@ -14,6 +14,7 @@ import { Title } from '@angular/platform-browser';
 import { ProfileDialogComponent } from 'src/app/shared/components/dialogs/profile-dialog/profile-dialog.component';
 import { NotificationsDialogComponent } from 'src/app/shared/components/dialogs/notifications-dialog/notifications-dialog.component';
 import { OverlayContainer } from '@angular/cdk/overlay';
+import { OneSignalService } from 'src/app/services/one-signal.service';
 
 @Component({
   selector: 'app-users-layout',
@@ -44,14 +45,15 @@ export class UsersLayoutComponent implements OnInit, OnDestroy {
     private httpService: HttpRequestService,
     private title: Title,
     private overlayContainer: OverlayContainer,
-    
+    private os: OneSignalService
     ) {
     this.setTitle();
     this.setMaterialContainer();
-    const subscription1 = this.isHandset$.subscribe(value => {
+    /*const subscription1 = this.isHandset$.subscribe(value => {
       this.isHandsetValue = value;
     });
-    this.subscriptions.push(subscription1);
+    this.subscriptions.push(subscription1);*/
+
   }
 
   setTitle() {
@@ -66,7 +68,10 @@ export class UsersLayoutComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.verifyLogin();
-    // this.checkNotifications();
+    this.os.onInit().then((player_id)=>{
+      this.os.savePlayer(player_id);
+    });
+
   }
 
   verifyLogin() {
@@ -77,7 +82,7 @@ export class UsersLayoutComponent implements OnInit, OnDestroy {
             this.userLogin$ = userInfo;
           }
         );
-        this.subscriptions.push(subscription2);
+        //this.subscriptions.push(subscription2);
       } else {
         this.router.navigate(['/home']);
       }

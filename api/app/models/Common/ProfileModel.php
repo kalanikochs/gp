@@ -57,6 +57,24 @@ class ProfileModel{
             return true;
         }
     }
+
+    function addPushID(){
+               
+        $user_id = $_REQUEST['user_id'];
+        $push_id = $_REQUEST['push_id'];
+       
+        $squery = "UPDATE persona SET push_id = '$push_id' WHERE persona_id=$user_id";
+        
+        $this->db->query($squery);
+        
+        $result = $this->db->rowCount();
+
+        if ($result and $result > 0) {
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
 
 ?>

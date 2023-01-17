@@ -17,7 +17,6 @@ class Profile extends Controller{
     }
 
     function checkLogin(){
-
         //1. verificar que este el usuario y la contrasena
         if (!isset($_REQUEST['email']) or !isset($_REQUEST['password'])) {
             printJSON(successFailure(false));

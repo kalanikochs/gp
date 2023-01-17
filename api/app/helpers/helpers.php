@@ -1,13 +1,15 @@
 <?php
 
 function textHeaders(){
-    header('Access-Control-Allow-Headers: Access-Control-Allow-Origin, Content-Type');
-    header("Access-Control-Allow-Origin: *");    
+  header("Access-Control-Allow-Origin: *");
+  header("Access-Control-Allow-Methods: GET,POST,PUT,OPTIONS");
+  header("Access-Control-Allow-Headers:*");
 }
 
 function printJSON($array){
-    header('Access-Control-Allow-Headers: Access-Control-Allow-Origin, Content-Type');
-    header("Access-Control-Allow-Origin: *");    
+  header("Access-Control-Allow-Origin: *");
+  header("Access-Control-Allow-Methods: GET,POST,PUT,OPTIONS");
+  header("Access-Control-Allow-Headers:*");
     header('Content-type:application/json; charset=utf-8');
     echo json_encode($array, JSON_UNESCAPED_UNICODE);
 }
